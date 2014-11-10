@@ -1,0 +1,55 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:        <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix a-sparql:    <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/> .
+@prefix a-sparql-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/sparql/> .
+
+a-sparql-r:SparqlAnalyzerTemplate a ldvm:AnalyzerTemplate ;
+	rdfs:label "SPARQL Analyzer"@en;
+	rdfs:comment "Processes input data with SPARQL CONSTRUCT query"@en;
+	ldvm:componentConfigurationTemplate a-sparql-r:Configuration ;
+	ldvm:inputTemplate a-sparql-r:Input ;
+	ldvm:outputTemplate a-sparql-r:Output ;
+	ldvm:feature a-sparql-r:Feature ;
+	.
+
+a-sparql:SparqlAnalyzerConfiguration a rdfs:Class ;
+	rdfs:label "SPARQL Analyzer Configuration"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+
+a-sparql:query a rdf:Property ;
+	rdfs:label "Query"@en ;
+	rdfs:domain a-sparql:SparqlAnalyzerConfiguration ;
+	rdfs:range xsd:string ;
+	.
+	
+a-sparql-r:Configuration a a-sparql:SparqlAnalyzerConfiguration ;
+	dcterms:title "Default SPARQL Query" ;
+	a-sparql:query """CONSTRUCT {GRAPH ?g {?s ?p ?o}} WHERE {GRAPH ?g {?s ?p ?o}}""" ;
+	.
+
+a-sparql-r:Input a ldvm:InputDataPortTemplate ;
+	dcterms:title "RDF Data input" ;
+	.
+	
+a-sparql-r:Output a ldvm:OutputDataPortTemplate ;
+	dcterms:title "RDF Data output" ;
+	.
+
+a-sparql-r:Signature a ldvm:Signature ;
+	dcterms:title "RDF data presence check" ;
+	ldvm:query """ASK {?s ?p ?o}""" ;
+	ldvm:appliesTo a-sparql-r:Input ;
+	.
+
+a-sparql-r:Feature a ldvm:Feature ;
+	dcterms:title "Process RDF data" ;
+	ldvm:signature a-sparql-r:Signature ;
+	.
+	

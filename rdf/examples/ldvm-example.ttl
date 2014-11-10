@@ -1,0 +1,27 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+
+@prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+
+<http://payola.cz/resource/pipeline/1> a ldvm:Pipeline ;
+	dcterms:title "COI.CZ inspections by region (no transformer)" ;
+	rdfs:seeAlso <http://live.payola.cz/analysis/af9a3afc-d549-4dba-98b9-87a57bb105c2> ;
+	.
+	
+<http://payola.cz/resource/analyzer/t-sparql> a ldvm:AnalyzerTemplate ;
+	dcterms:title "SPARQL transformer" ;
+	.
+	
+<http://payola.cz/resource/datasource/lodcz> a ldvm:DataSourceTemplate ;
+	dcterms:title "linked.opendata.cz" ;
+	.
+
+<http://payola.cz/resource/datasource/lodcz/configuration/1> a ldvm:ComponentConfiguration ;
+	dcterms:title "linked.opendata.cz" ;
+	void:sparqlEndpoint <http://linked.opendata.cz/sparql> ;
+	.
+
+<http://payola.cz/resource/
