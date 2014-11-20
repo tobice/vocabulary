@@ -86,7 +86,7 @@ ldvm:inputTemplate a rdf:Property;
 	.
 
 ldvm:inputInstance a rdf:Property;
-	rdfs:label "Input Template"@en;
+	rdfs:label "Input Instance"@en;
 	rdfs:domain ldvm:ComponentInstance ;
 	rdfs:range ldvm:DataPortInstance ;
 	.
@@ -130,10 +130,10 @@ ldvm:componentConfigurationInstance a rdf:Property;
 	rdfs:range ldvm:ComponentConfiguration ;
 	.
 
-ldvm:inputTemplate a rdf:Property;
-	rdfs:label "Input Template"@en;
-	rdfs:domain ldvm:ComponentTemplate ;
-	rdfs:range ldvm:DataPortTemplate ;
+ldvm:outputInstance a rdf:Property;
+	rdfs:label "Output Instance"@en;
+	rdfs:domain ldvm:ComponentInstance ;
+	rdfs:range ldvm:DataPortInstance ;
 	.
 
 ldvm:outputTemplate a rdf:Property;
@@ -158,4 +158,10 @@ ldvm:instanceOf a rdf:Property;
 	rdfs:label "Instance of"@en ;
 	rdfs:domain ldvm:ComponentTemplate ;
 	rdfs:range ldvm:ComponentInstance ;
+	.
+	
+ldvm:boundTo a rdf:Property;
+	rdfs:label "Bound To"@en ;
+	rdfs:domain ldvm:DataPortInstance ;
+	rdfs:range ldvm:DataPortInstance ;
 	.

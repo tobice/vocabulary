@@ -36,5 +36,5 @@ d-sparql-r:Output a ldvm:OutputDataPortTemplate ;
 	.
 	
 d-sparql-r:Service a sd:Service ;
-	ds:endpoint <http://linked.opendata.cz> ;
+	sd:endpoint <http://linked.opendata.cz> ;
 	.
