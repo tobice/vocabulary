@@ -3,25 +3,166 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 
 @prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix d-sparql: <http://linked.opendata.cz/ontology/ldvm/datasource/sparql/> .
+@prefix a-sparql:    <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/> .
+@prefix v-gmaps:    <http://linked.opendata.cz/ontology/ldvm/visualizer/gmaps/> .
+@prefix v-gmaps-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/gmaps/> .
+
+### Pipeline ###
 
 <http://payola.cz/resource/pipeline/1> a ldvm:Pipeline ;
 	dcterms:title "COI.CZ inspections by region (no transformer)" ;
 	rdfs:seeAlso <http://live.payola.cz/analysis/af9a3afc-d549-4dba-98b9-87a57bb105c2> ;
 	.
 	
-<http://payola.cz/resource/analyzer/t-sparql> a ldvm:AnalyzerTemplate ;
-	dcterms:title "SPARQL transformer" ;
+### Datasources ###
+	
+##### Datasource template, configuration, output template #####
+<http://payola.cz/resource/template/datasource/lodcz> a ldvm:DataSourceTemplate ;
+	dcterms:title "linked.opendata.cz" ;
+	ldvm:outputTemplate <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
+	ldvm:componentConfigurationTemplate <http://payola.cz/resource/template/datasource/lodcz/configuration/default> ;
+	.
+
+<http://payola.cz/resource/template/datasource/lodcz/dataport/output> a ldvm:OutputTemplate ;
+	dcterms:title "Triples output" ;
 	.
 	
-<http://payola.cz/resource/datasource/lodcz> a ldvm:DataSourceTemplate ;
+<http://payola.cz/resource/template/datasource/lodcz/configuration/default> a d-sparql:SparqlEndpointDataSourceConfiguration ;
 	dcterms:title "linked.opendata.cz" ;
+	d-sparql:service <http://payola.cz/resource/template/datasource/lodcz/configuration/default/Service> ;
 	.
 
-<http://payola.cz/resource/datasource/lodcz/configuration/1> a ldvm:ComponentConfiguration ;
+<http://payola.cz/resource/template/datasource/lodcz/configuration/default/Service> a sd:Service ;
+	sd:endpoint <http://linked.opendata.cz> ;
+	.
+	
+##### Datasource instances (one for geocoordinates of regions, one for inspections in regions), they inherit template configuration, dataport (output) instances #####
+	
+<http://payola.cz/resource/instance/datasource/lodcz/1> a ldvm:DataSourceInstance ;
 	dcterms:title "linked.opendata.cz" ;
-	void:sparqlEndpoint <http://linked.opendata.cz/sparql> ;
+	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz> ;
+	ldvm:outputInstance <http://payola.cz/resource/instance/datasource/lodcz/1/output/1> ;
+	ldvm:componentConfigurationInstance <http://payola.cz/resource/instance/datasource/lodcz/1/configuration> ;
 	.
 
-<http://payola.cz/resource/
+<http://payola.cz/resource/instance/datasource/lodcz/1/configuration> a d-sparql:SparqlEndpointDataSourceConfiguration ;
+	dcterms:title "linked.opendata.cz" ;
+	d-sparql:service <http://payola.cz/resource/instance/datasource/lodcz/1/Service> ;
+	.
+
+<http://payola.cz/resource/instance/datasource/lodcz/1/Service> a sd:Service ;
+	sd:endpoint <http://linked.opendata.cz> ;
+	
+	#TODO: Is this OK? It is technically a description of a SPARQL endpoint service... not the requested named graphs... but I think it could work
+	sd:defaultDataset [
+        a sd:Dataset ;
+        sd:namedGraph [
+            a sd:NamedGraph ;
+            sd:name <http://linked.opendata.cz/resource/dataset/coi.cz/kontroly> ;
+        ]
+	]
+	.
+	
+<http://payola.cz/resource/instance/datasource/lodcz/1/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "Triples output" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
+	.
+
+<http://payola.cz/resource/instance/datasource/lodcz/2> a ldvm:DataSourceInstance ;
+	dcterms:title "linked.opendata.cz" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz> ;
+	ldvm:outputInstance <http://payola.cz/resource/instance/datasource/lodcz/2/output/1> ;
+	ldvm:componentConfigurationInstance <http://payola.cz/resource/instance/datasource/lodcz/2/configuration> ;
+	.
+
+<http://payola.cz/resource/instance/datasource/lodcz/2/configuration> a d-sparql:SparqlEndpointDataSourceConfiguration ;
+	dcterms:title "linked.opendata.cz" ;
+	d-sparql:service <http://payola.cz/resource/instance/datasource/lodcz/2/Service> ;
+	.
+
+<http://payola.cz/resource/instance/datasource/lodcz/2/Service> a sd:Service ;
+	sd:endpoint <http://linked.opendata.cz> ;
+	
+	#TODO: Is this OK? It is technically a description of a SPARQL endpoint service... not the requested named graphs... but I think it could work
+	sd:defaultDataset [
+        a sd:Dataset ;
+        sd:namedGraph [
+            a sd:NamedGraph ;
+            sd:name <http://linked.opendata.cz/resource/dataset/czso.cz/regions> ;
+        ]
+	]
+	.
+
+<http://payola.cz/resource/instance/datasource/lodcz/2/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "Triples output" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
+	.
+
+### COI.CZ analyzer template, 2 inputs, one for geocoordinates of places, one for inspections in places ###
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections> a ldvm:AnalyzerTemplate ;
+    ##consists of customized templates of t-sparql + union template? - TODO: Somehow describe the "inner" analysis
+	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
+	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1>
+	.
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> a ldvm:InputTemplate ;
+	dcterms:title "Geocoordinates of places" ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> a ldvm:InputTemplate ;
+	dcterms:title "Inspections of places" ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> a ldvm:OutputTemplate ;
+	dcterms:title "Inspections in regions with geocoordinates" ;
+	.
+	
+	#no configuration needed, this is a composite analyzer, configurations of individual atomic analyzers is with these analyzers
+	#TODO: do we need/want to distinguish between atomic and composite analyzers?
+
+### COI.CZ analyzer instance, 2 inputs, one for geocoordinates of places, one for inspections in places, config inherited from template ###
+	
+<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1> a ldvm:AnalyzerInstance ;
+	dcterms:title "COI.CZ inspections analyzer" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections> ;
+	ldvm:inputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> ;
+	ldvm:inputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/inspections> ;
+	ldvm:outputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/output/1> ;
+	.
+	
+<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> a ldvm:DataPortInstance ;
+	dcterms:title "Geocoordinates of places" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/2> ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/1/input/inspections> a ldvm:DataPortInstance ;
+	dcterms:title "Inspections of places" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/1> ;
+	.
+	
+<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "Inspections in regions with geocoordinates" ;
+	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> ;
+	.
+
+### GMaps visualizer - template in ldvm-v-gmaps.ttl
+
+<http://payola.cz/resource/instance/visualizer/gmaps/1> a ldvm:VisualizerInstance ;
+	dcterms:title "COI.CZ inspections analyzer" ;
+	ldvm:instanceOf v-gmaps-r:GoogleMapsVisualizerTemplate ;
+	ldvm:inputInstance <http://payola.cz/resource/instance/visualizer/gmaps/1/input> ;
+	.
+	
+<http://payola.cz/resource/instance/visualizer/gmaps/1/input> a ldvm:DataPortInstance ;
+	dcterms:title "Points and descriptions" ;
+	ldvm:instanceOf v-gmaps-r:Input ;
+	ldvm:boundTo <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/output/1> ;
+	.
