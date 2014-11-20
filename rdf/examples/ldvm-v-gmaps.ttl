@@ -35,17 +35,17 @@ v-gmaps-r:Input a ldvm:InputDataPortTemplate ;
 	dcterms:title "Points and descriptions" ;
 	.
 	
-v-gmaps-r:MarkersFeature a ldvm:Feature ;
+v-gmaps-r:MarkersFeature a ldvm:MandatoryFeature ;
 	dcterms:title "Display markers on map" ;
 	ldvm:signature v-gmaps-r:MarkersSignature ;
 	.
 	
-v-gmaps-r:LabelsFeature a ldvm:Feature ;
+v-gmaps-r:LabelsFeature a ldvm:OptionalFeature ;
 	dcterms:title "Display marker labels" ;
 	ldvm:signature v-gmaps-r:LabelsSignature ;
 	.
 	
-v-gmaps:BoxesFeature a ldvm:Feature ;
+v-gmaps:BoxesFeature a ldvm:OptionalFeature ;
 	dcterms:title "Display marker descriptions" ;
 	ldvm:signature v-gmaps-r:BoxesSignature ;
 	.

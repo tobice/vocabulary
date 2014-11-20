@@ -101,6 +101,18 @@ ldvm:Feature a rdfs:Class;
 	rdfs:comment "Linked Data Visualization Model Feature"@en;
 	.
 
+ldvm:MandatoryFeature a rdfs:Class;
+	rdfs:label "LDVM Mandatory Feature"@en;
+	rdfs:subClassOf ldvm:Feature ;
+	rdfs:comment "Linked Data Visualization Model Mandatory Feature"@en;
+	.
+
+ldvm:OptionalFeature a rdfs:Class;
+	rdfs:label "LDVM Optional Feature"@en;
+	rdfs:subClassOf ldvm:Feature ;
+	rdfs:comment "Linked Data Visualization Model Optional Feature"@en;
+	.
+
 ldvm:Signature a rdfs:Class;
 	rdfs:label "LDVM Signature"@en;
 	rdfs:comment "Linked Data Visualization Model Signature"@en;
