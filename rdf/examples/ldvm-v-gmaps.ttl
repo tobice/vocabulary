@@ -45,7 +45,7 @@ v-gmaps-r:LabelsFeature a ldvm:OptionalFeature ;
 	ldvm:signature v-gmaps-r:LabelsSignature ;
 	.
 	
-v-gmaps:BoxesFeature a ldvm:OptionalFeature ;
+v-gmaps-r:BoxesFeature a ldvm:OptionalFeature ;
 	dcterms:title "Display marker descriptions" ;
 	ldvm:signature v-gmaps-r:BoxesSignature ;
 	.
