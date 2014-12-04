@@ -16,6 +16,10 @@
 <http://payola.cz/resource/pipeline/1> a ldvm:Pipeline ;
 	dcterms:title "COI.CZ inspections by region (no transformer)" ;
 	rdfs:seeAlso <http://live.payola.cz/analysis/af9a3afc-d549-4dba-98b9-87a57bb105c2> ;
+	ldvm:member <http://payola.cz/resource/instance/datasource/lodcz/1> ;
+	ldvm:member <http://payola.cz/resource/instance/datasource/lodcz/2> ;
+	ldvm:member <http://payola.cz/resource/instance/visualizer/gmaps/1> ;
+	ldvm:member <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1>
 	.
 	
 ### Datasources ###
