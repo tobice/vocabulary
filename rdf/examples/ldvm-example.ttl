@@ -160,7 +160,7 @@
 ### GMaps visualizer - template in ldvm-v-gmaps.ttl
 
 <http://payola.cz/resource/instance/visualizer/gmaps/1> a ldvm:VisualizerInstance ;
-	dcterms:title "COI.CZ inspections analyzer" ;
+	dcterms:title "Google maps visualizer" ;
 	ldvm:instanceOf v-gmaps-r:GoogleMapsVisualizerTemplate ;
 	ldvm:inputInstance <http://payola.cz/resource/instance/visualizer/gmaps/1/input> ;
 	.
