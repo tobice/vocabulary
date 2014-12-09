@@ -146,7 +146,7 @@
 	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/2> ;
 	.
 	
-<http://payola.cz/resource/template/analyzer/coi.cz-inspections/1/input/inspections> a ldvm:DataPortInstance ;
+<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/inspections> a ldvm:DataPortInstance ;
 	dcterms:title "Inspections of places" ;
 	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
 	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/1> ;
