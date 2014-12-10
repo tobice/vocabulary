@@ -143,7 +143,7 @@
 <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> a ldvm:DataPortInstance ;
 	dcterms:title "Geocoordinates of places" ;
 	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
-	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/2> ;
+	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/2/output/1> ;
 	.
 	
 <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/inspections> a ldvm:DataPortInstance ;
