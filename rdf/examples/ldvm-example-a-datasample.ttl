@@ -1,0 +1,7 @@
+@prefix s: <http://schema.org/>	.
+
+<http://example.org/resource/checkAction> s:geo <http://example.org/resource/checkAction/geoPoint> ;
+			s:title "My CheckAction title" .
+<http://example.org/resource/checkAction/geoPoint> a s:GeoCoordinates;
+				s:latitude "50.088433" ;
+				s:longitude "14.403422" .
