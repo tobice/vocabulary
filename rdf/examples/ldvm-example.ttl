@@ -114,6 +114,7 @@
 	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
 	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> ;
 	ldvm:feature <http://payola.cz/resource/template/analyzer/coi.cz-inspections/feature/inspectionsAndGeo> ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-example-a-datasample.ttl> ;
 	.
 	
 ##<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> a ldvm:InputTemplate ;
