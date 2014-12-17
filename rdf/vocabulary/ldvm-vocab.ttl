@@ -36,13 +36,13 @@ ldvm:DataSourceInstance a rdfs:Class;
 ldvm:AnalyzerTemplate a rdfs:Class;
 	rdfs:label "LDVM Analyzer Template"@en;
 	rdfs:comment "Linked Data Visualization Model Analyzer Template"@en;
-	rdfs:subClassOf ldvm:ComponentTemplate ;
+	rdfs:subClassOf ldvm:DataSourceTemplate ;
 	.
 
 ldvm:AnalyzerInstance a rdfs:Class;
 	rdfs:label "LDVM Analyzer Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Analyzer Instance"@en;
-	rdfs:subClassOf ldvm:ComponentInstance ;
+	rdfs:subClassOf ldvm:DataSourceInstance ;
 	.
 
 ldvm:VisualizerTemplate a rdfs:Class;
