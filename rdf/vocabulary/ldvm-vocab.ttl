@@ -154,6 +154,11 @@ ldvm:outputTemplate a rdf:Property;
 	rdfs:range ldvm:DataPortTemplate ;
 	.
 
+ldvm:outputDataSample a rdf:Property;
+	rdfs:label "Output Data Sample"@en;
+	rdfs:domain ldvm:OutputDataPortTemplate ;
+	.
+
 ldvm:query a rdf:Property;
 	rdfs:label "Query"@en;
 	rdfs:domain ldvm:Signature;
