@@ -110,14 +110,15 @@
 	
 <http://payola.cz/resource/template/analyzer/coi.cz-inspections> a ldvm:AnalyzerTemplate ;
     ##consists of customized templates of t-sparql + union template? - TODO: Somehow describe the "inner" analysis
-	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+##	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
 	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
-	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1>
+	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> ;
+	ldvm:feature <http://payola.cz/resource/template/analyzer/coi.cz-inspections/feature/inspectionsAndGeo> ;
 	.
 	
-<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> a ldvm:InputTemplate ;
-	dcterms:title "Geocoordinates of places" ;
-	.
+##<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> a ldvm:InputTemplate ;
+##	dcterms:title "Geocoordinates of places" ;
+##	.
 	
 <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> a ldvm:InputTemplate ;
 	dcterms:title "Inspections of places" ;
@@ -127,8 +128,39 @@
 	dcterms:title "Inspections in regions with geocoordinates" ;
 	.
 	
-	#no configuration needed, this is a composite analyzer, configurations of individual atomic analyzers is with these analyzers
-	#TODO: do we need/want to distinguish between atomic and composite analyzers?
+#no configuration needed, this is a composite analyzer, configurations of individual atomic analyzers is with these analyzers
+#TODO: do we need/want to distinguish between atomic and composite analyzers?
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/feature/inspectionsAndNamesAndGeo> a ldvm:MandatoryFeature ;
+	dcterms:title "s:CheckActions and gr:legalNames of s:objects" ;
+	ldvm:signature <http://payola.cz/resource/template/analyzer/coi.cz-inspections/signature/inspectionsAndNamesAndGeo> ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/signature/inspectionsAndNamesAndGeo> a ldvm:Signature ;
+	dcterms:title "s:CheckActions and gr:legalNames of s:objects" ;
+	ldvm:query """
+		PREFIX gr: <http://purl.org/goodrelations/v1#>
+		PREFIX ruian: <http://ruian.linked.opendata.cz/ontology/>
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		PREFIX ec: <http://ec.europa.eu/eurostat/ramon/ontologies/geographic.rdf#>
+		PREFIX s: <http://schema.org/>
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		PREFIX adms: <http://www.w3.org/ns/adms#>
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+		
+		ASK {
+			?ca a s:CheckAction;
+				s:location/s:location ?region;
+				s:object ?object ;
+				s:location/s:geo ?g.
+			?g s:latitude ?lat;
+				s:longitude ?lng.
+			?object gr:legalName ?title;
+				adms:identifier/skos:notation ?ic .
+			}
+	""" ;
+	ldvm:appliesTo <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
+	.
 
 ### COI.CZ analyzer instance, 2 inputs, one for geocoordinates of places, one for inspections in places, config inherited from template ###
 	
