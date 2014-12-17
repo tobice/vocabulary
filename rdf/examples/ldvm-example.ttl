@@ -31,7 +31,7 @@
 	ldvm:componentConfigurationTemplate <http://payola.cz/resource/template/datasource/lodcz/configuration/default> ;
 	.
 
-<http://payola.cz/resource/template/datasource/lodcz/dataport/output> a ldvm:OutputTemplate ;
+<http://payola.cz/resource/template/datasource/lodcz/dataport/output> a ldvm:OutputDataPortTemplate ;
 	dcterms:title "Triples output" ;
 	.
 	
@@ -116,15 +116,15 @@
 	ldvm:feature <http://payola.cz/resource/template/analyzer/coi.cz-inspections/feature/inspectionsAndNamesAndGeo> ;
 	.
 	
-##<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> a ldvm:InputTemplate ;
+##<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> a ldvm:InputDataPortTemplate ;
 ##	dcterms:title "Geocoordinates of places" ;
 ##	.
 	
-<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> a ldvm:InputTemplate ;
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> a ldvm:InputDataPortTemplate ;
 	dcterms:title "Inspections of places" ;
 	.
 	
-<http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> a ldvm:OutputTemplate ;
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> a ldvm:OutputDataPortTemplate ;
 	dcterms:title "Inspections in regions with geocoordinates" ;
 	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-example-a-datasample.ttl> ;
 	.
