@@ -168,20 +168,20 @@
 <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1> a ldvm:AnalyzerInstance ;
 	dcterms:title "COI.CZ inspections analyzer" ;
 	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections> ;
-	ldvm:inputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> ;
+	#ldvm:inputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> ;
 	ldvm:inputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/inspections> ;
 	ldvm:outputInstance <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/output/1> ;
 	.
 	
-<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> a ldvm:DataPortInstance ;
-	dcterms:title "Geocoordinates of places" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
-	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/2/output/1> ;
-	.
+#<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> a ldvm:DataPortInstance ;
+#	dcterms:title "Geocoordinates of places" ;
+#	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+#	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/2/output/1> ;
+#	.
 	
 <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/inspections> a ldvm:DataPortInstance ;
 	dcterms:title "Inspections of places" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
 	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/1> ;
 	.
 	
