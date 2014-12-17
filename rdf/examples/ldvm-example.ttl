@@ -41,7 +41,7 @@
 	.
 
 <http://payola.cz/resource/template/datasource/lodcz/configuration/default/Service> a sd:Service ;
-	sd:endpoint <http://linked.opendata.cz> ;
+	sd:endpoint <http://linked.opendata.cz/sparql> ;
 	.
 	
 ##### Datasource instances (one for geocoordinates of regions, one for inspections in regions), they inherit template configuration, dataport (output) instances #####
@@ -59,15 +59,15 @@
 	.
 
 <http://payola.cz/resource/instance/datasource/lodcz/1/Service> a sd:Service ;
-	sd:endpoint <http://linked.opendata.cz> ;
+	sd:endpoint <http://linked.opendata.cz/sparql> ;
 	
 	#TODO: Is this OK? It is technically a description of a SPARQL endpoint service... not the requested named graphs... but I think it could work
 	sd:defaultDataset [
         a sd:Dataset ;
-        sd:namedGraph [
-            a sd:NamedGraph ;
-            sd:name <http://linked.opendata.cz/resource/dataset/coi.cz/kontroly> ;
-        ]
+        #sd:namedGraph [
+        #    a sd:NamedGraph ;
+        #    sd:name <http://linked.opendata.cz/resource/dataset/coi.cz/kontroly> ;
+        #]
 	]
 	.
 	
