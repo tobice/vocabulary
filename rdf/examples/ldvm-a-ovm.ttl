@@ -1,0 +1,87 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+
+@prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+
+### OVM analyzer template, 2 inputs, one for IPP + geo, one for IPP POS + geo ###
+	
+<http://payola.cz/resource/template/analyzer/ovm> a ldvm:AnalyzerTemplate ;
+    ##consists of 2 customized templates of t-sparql + union template? - TODO: Somehow describe the "inner" analysis
+	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/ovm/input/ovm> ;
+	ldvm:inputTemplate <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
+	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
+	ldvm:feature <http://payola.cz/resource/template/analyzer/ovm/feature/ovm> ;
+	ldvm:feature <http://payola.cz/resource/template/analyzer/ovm/feature/pos> ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/ovm/input/ovm> a ldvm:InputDataPortTemplate ;
+	dcterms:title "Institutions of Public Power"@en, "Orgány veřejné moci"@cs ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/ovm/input/pos> a ldvm:InputDataPortTemplate ;
+	dcterms:title "Points of Service of Institutions of Public Power"@en, "Úřadovny orgánů veřejné moci"@cs ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/ovm/output/1> a ldvm:OutputDataPortTemplate ;
+	dcterms:title "IPPs with geocoordinates" ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-example-ovm-a-datasample.ttl> ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/ovm/feature/ovm> a ldvm:MandatoryFeature ;
+	dcterms:title "IPPs" ;
+	ldvm:signature <http://payola.cz/resource/template/analyzer/ovm/signature/ovm> ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/feature/pos> a ldvm:OptionalFeature ;
+	dcterms:title "IPP POSs" ;
+	ldvm:signature <http://payola.cz/resource/template/analyzer/ovm/signature/pos> ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/signature/pos> a ldvm:Signature ;
+	dcterms:title "IPP POSs" ;
+	ldvm:query """
+		PREFIX s: <http://schema.org/>
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+		
+		ASK {
+			?b <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/ovm/typSubjektu> ?type ;
+				s:hasPOS ?pos .
+				?pos s:address ?address .
+			?type skos:prefLabel ?typeText .
+			
+			?c	s:longitude ?lng;
+				s:latitude ?lat ;
+				^s:geo ?address.
+			}
+	""" ;
+	ldvm:appliesTo <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/signature/ovm> a ldvm:Signature ;
+	dcterms:title "IPPs" ;
+	ldvm:query """
+		PREFIX s: <http://schema.org/>
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+		
+		ASK {
+			?b <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/ovm/typSubjektu> ?type ;
+			s:address ?address .
+	
+			?type skos:prefLabel ?typeText .
+	
+			?c	s:longitude ?lng;
+				s:latitude ?lat ;
+				^s:geo ?address .
+			}
+	""" ;
+	ldvm:appliesTo <http://payola.cz/resource/template/analyzer/ovm/input/ovm> ;
+	.
+	
+#no configuration needed, this is a composite analyzer, configurations of individual atomic analyzers is with these analyzers
+#TODO: do we need/want to distinguish between atomic and composite analyzers?
+	
+#2 a-sparql + 1 a-union

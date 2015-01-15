@@ -1,0 +1,25 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:        <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix a-union:    <http://linked.opendata.cz/ontology/ldvm/analyzer/union/> .
+@prefix a-union-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/union/> .
+
+a-union-r:UnionAnalyzerTemplate a ldvm:AnalyzerTemplate ;
+	rdfs:label "Union Analyzer"@en;
+	rdfs:comment "Merges input data as a union"@en;
+	ldvm:inputTemplate a-union-r:Input ;
+	ldvm:outputTemplate a-union-r:Output ;
+	.
+
+a-union-r:Input a ldvm:InputDataPortTemplate ;
+	dcterms:title "RDF Data input - multiple expected" ;
+	.
+	
+a-union-r:Output a ldvm:OutputDataPortTemplate ;
+	dcterms:title "RDF Data output" ;
+	.
