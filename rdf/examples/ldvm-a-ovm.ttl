@@ -87,6 +87,8 @@
 	
 #no configuration needed, this is a composite analyzer, configurations of individual atomic analyzers is with these analyzers
 	
+## Inner Analyzer 1 - IPPs
+	
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm> a ldvm:AnalyzerInstance ;
 	ldvm:instanceOf a-sparql-r:SparqlAnalyzerTemplate ;
 	ldvm:inputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/input/1> ;
@@ -134,6 +136,7 @@
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/input/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPP triples input" ;
 	ldvm:instanceOf a-sparql-r:Input ;
+	ldvm:nestedBoundTo <http://payola.cz/resource/template/analyzer/ovm/input/ovm> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/output/1> a ldvm:DataPortInstance ;
@@ -141,7 +144,7 @@
 	ldvm:instanceOf a-sparql-r:Output ;
 	.
 
-#TODO: bindings	
+## Inner Analyzer 2 - POSes
 	
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos> a ldvm:AnalyzerInstance ;
 	ldvm:instanceOf a-sparql-r:SparqlAnalyzerTemplate ;
@@ -191,6 +194,7 @@
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/input/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPP POSs triples input" ;
 	ldvm:instanceOf a-sparql-r:Input ;
+	ldvm:nestedBoundTo <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/output/1> a ldvm:DataPortInstance ;
@@ -198,7 +202,7 @@
 	ldvm:instanceOf a-sparql-r:Output ;
 	.
 
-#TODO: bindings
+## Inner Union
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/union> a ldvm:AnalyzerInstance ;
 	ldvm:instanceOf a-union-r:UnionAnalyzerTemplate ;
@@ -209,11 +213,11 @@
 <http://payola.cz/resource/template/analyzer/ovm/instance/union/input/1> a ldvm:DataPortInstance ;
 	dcterms:title "Triples to merge" ;
 	ldvm:instanceOf a-union-r:Input ;
+	ldvm:boundTo <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/output/1>, <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/output/1> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/union/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Union triples output" ;
 	ldvm:instanceOf a-union-r:Output ;
+	ldvm:nestedBoundTo <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
 	.
-
-#TODO: bindings
