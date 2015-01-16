@@ -183,6 +183,13 @@ ldvm:boundTo a rdf:Property;
 	rdfs:range ldvm:DataPortInstance ;
 	.
 	
+ldvm:nestedBoundTo a rdf:Property;
+	rdfs:label "Nested Bound To"@en ;
+	rdfs:comment "This is used for nesting of analyzers. Inner analyzers are instances, the outer analyzer is a template"@en ;
+	rdfs:domain ldvm:DataPortInstance ;
+	rdfs:range ldvm:DataPortTemplate ;
+	.
+
 ldvm:member a rdf:Property;
     rdfs:label "Pipeline member"@en ;
     rdfs:domain ldvm:Pipeline ;
