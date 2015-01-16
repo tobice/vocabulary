@@ -5,6 +5,10 @@
 @prefix void:  <http://rdfs.org/ns/void#> .
 @prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 
+@prefix a-sparql-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/sparql/> .
+@prefix a-sparql:    <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/> .
+@prefix a-union:    <http://linked.opendata.cz/ontology/ldvm/analyzer/union/> .
+@prefix a-union-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/union/> .
 @prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
 
 ### OVM analyzer template, 2 inputs, one for IPP + geo, one for IPP POS + geo ###
@@ -82,6 +86,134 @@
 	.
 	
 #no configuration needed, this is a composite analyzer, configurations of individual atomic analyzers is with these analyzers
-#TODO: do we need/want to distinguish between atomic and composite analyzers?
 	
-#2 a-sparql + 1 a-union
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm> a ldvm:AnalyzerInstance ;
+	ldvm:instanceOf a-sparql-r:SparqlAnalyzerTemplate ;
+	ldvm:inputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/input/1> ;
+	ldvm:outputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/output/1> ;
+	ldvm:componentConfigurationInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/configuration> ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/configuration> a a-sparql:SparqlAnalyzerConfiguration ;
+	dcterms:title "Query processing IPPs" ;
+	a-sparql:query """	PREFIX s: <http://schema.org/>
+						PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+						
+						CONSTRUCT {
+							?b s:geo ?c ;
+								s:title ?title;
+								s:description ?desc ;
+								<http://linked.opendata.cz/ontology/domain/seznam.gov.cz/ovm/typSubjektu> ?type.
+							?type skos:prefLabel ?typeText .
+							?c 	s:latitude ?lat; 
+								s:longitude ?lng .
+						} WHERE {
+							?b <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/ovm/typSubjektu> ?type ;
+								s:address ?address .
+
+							OPTIONAL { ?b s:name ?title . }
+							OPTIONAL {?address s:postalCode ?psc. }
+							OPTIONAL {?address s:addressLocality ?locality.}
+							OPTIONAL {?address s:streetAddress ?street .}
+							OPTIONAL {?address s:addressRegion ?region .}
+							
+							?type skos:prefLabel ?typeText .
+							
+							?c 	s:longitude ?lng;
+								s:latitude ?lat ;
+								^s:geo ?address.
+							
+							BIND(concat(?typeText, ': <a href="', ?b, '" target="_blank">', ?title, "</a>",\"\"\"
+							\"\"\",?street, \"\"\"
+							\"\"\", ?region ,\"\"\"
+							\"\"\", ?locality, \"\"\"
+							\"\"\", ?psc ) as ?desc)
+						}""" ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/input/1> a ldvm:DataPortInstance ;
+	dcterms:title "IPP triples input" ;
+	ldvm:instanceOf a-sparql-r:Input ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "IPP triples output" ;
+	ldvm:instanceOf a-sparql-r:Output ;
+	.
+
+#TODO: bindings	
+	
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos> a ldvm:AnalyzerInstance ;
+	ldvm:instanceOf a-sparql-r:SparqlAnalyzerTemplate ;
+	ldvm:inputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/input/1> ;
+	ldvm:outputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/output/1> ;
+	ldvm:componentConfigurationInstance <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/configuration> ;
+	.
+	
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/configuration> a a-sparql:SparqlAnalyzerConfiguration ;
+	dcterms:title "Query processing IPP POSes" ;
+	a-sparql:query """	PREFIX s: <http://schema.org/>
+						PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+						
+						CONSTRUCT {
+							?pos s:geo ?c ;
+								s:title ?title;
+								s:description ?desc ;
+								<http://linked.opendata.cz/ontology/domain/seznam.gov.cz/ovm/typSubjektu> ?type.
+							?type skos:prefLabel ?typeText .
+
+							?c s:latitude ?lat; s:longitude ?lng .
+						} WHERE	{
+							?b <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/ovm/typSubjektu> ?type ;
+								s:hasPOS ?pos .
+							?pos s:address ?address .
+
+							OPTIONAL {?pos s:name ?title .}
+							OPTIONAL {?address s:postalCode ?psc. }
+							OPTIONAL {?address s:addressLocality ?locality.}
+							OPTIONAL {?address s:streetAddress ?street .}
+							OPTIONAL {?address s:addressRegion ?region .}
+
+							?type skos:prefLabel ?typeText .
+
+							?c s:longitude ?lng;
+								s:latitude ?lat ;
+								^s:geo ?address.
+							
+							BIND(concat(?typeText, ': <a href="', ?b, '" target="_blank">', ?title, "</a>",\"\"\"
+							\"\"\",?street, \"\"\"
+							\"\"\", ?region ,\"\"\"
+							\"\"\", ?locality, \"\"\"
+							\"\"\", ?psc ) as ?desc)
+						}""" ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/input/1> a ldvm:DataPortInstance ;
+	dcterms:title "IPP POSs triples input" ;
+	ldvm:instanceOf a-sparql-r:Input ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "IPP POSs triples output" ;
+	ldvm:instanceOf a-sparql-r:Output ;
+	.
+
+#TODO: bindings
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/union> a ldvm:AnalyzerInstance ;
+	ldvm:instanceOf a-union-r:UnionAnalyzerTemplate ;
+	ldvm:inputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/union/input/1> ;
+	ldvm:outputInstance <http://payola.cz/resource/template/analyzer/ovm/instance/union/output/1> ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/union/input/1> a ldvm:DataPortInstance ;
+	dcterms:title "Triples to merge" ;
+	ldvm:instanceOf a-union-r:Input ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/union/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "Union triples output" ;
+	ldvm:instanceOf a-union-r:Output ;
+	.
+
+#TODO: bindings
