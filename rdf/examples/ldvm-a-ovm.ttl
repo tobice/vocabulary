@@ -20,6 +20,9 @@
 	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
 	ldvm:feature <http://payola.cz/resource/template/analyzer/ovm/feature/ovm> ;
 	ldvm:feature <http://payola.cz/resource/template/analyzer/ovm/feature/pos> ;
+	ldvm:nestedMember <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm> ;
+	ldvm:nestedMember <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos> ;
+	ldvm:nestedMember <http://payola.cz/resource/template/analyzer/ovm/instance/union> ;
 	.
 	
 <http://payola.cz/resource/template/analyzer/ovm/input/ovm> a ldvm:InputDataPortTemplate ;
