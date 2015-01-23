@@ -177,6 +177,12 @@ ldvm:instanceOf a rdf:Property;
 	rdfs:range ldvm:ComponentTemplate ;
 	.
 	
+ldvm:dataportInstanceOf a rdf:Property;
+	rdfs:label "Instance of Dataport Template"@en ;
+	rdfs:domain ldvm:DataPortInstance ;
+	rdfs:range ldvm:DataPortTemplate ;
+	.
+
 ldvm:boundTo a rdf:Property;
 	rdfs:label "Bound to"@en ;
 	rdfs:domain ldvm:DataPortInstance ;

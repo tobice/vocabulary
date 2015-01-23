@@ -73,7 +73,7 @@
 	
 <http://payola.cz/resource/instance/datasource/lodcz/1/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Triples output" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
 	.
 
 <http://payola.cz/resource/instance/datasource/lodcz/2> a ldvm:DataSourceInstance ;
@@ -103,7 +103,7 @@
 
 <http://payola.cz/resource/instance/datasource/lodcz/2/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Triples output" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
 	.
 
 ### COI.CZ analyzer template, 2 inputs, one for geocoordinates of places, one for inspections in places ###
@@ -175,19 +175,19 @@
 	
 #<http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/geocoordinates> a ldvm:DataPortInstance ;
 #	dcterms:title "Geocoordinates of places" ;
-#	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
+#	ldvm:dataportInstanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/geocoordinates> ;
 #	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/2/output/1> ;
 #	.
 	
 <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/input/inspections> a ldvm:DataPortInstance ;
 	dcterms:title "Inspections of places" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/input/inspections> ;
 	ldvm:boundTo <http://payola.cz/resource/instance/datasource/lodcz/1/output/1> ;
 	.
 	
 <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Inspections in regions with geocoordinates" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/analyzer/coi.cz-inspections/output/1> ;
 	.
 
 ### GMaps visualizer - template in ldvm-v-gmaps.ttl
@@ -200,6 +200,6 @@
 	
 <http://payola.cz/resource/instance/visualizer/gmaps/1/input> a ldvm:DataPortInstance ;
 	dcterms:title "Points and descriptions" ;
-	ldvm:instanceOf v-gmaps-r:Input ;
+	ldvm:dataportInstanceOf v-gmaps-r:Input ;
 	ldvm:boundTo <http://payola.cz/resource/instance/analyzer/coi.cz-inspections/1/output/1> ;
 	.

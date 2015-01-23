@@ -55,7 +55,7 @@
 	
 <http://payola.cz/resource/pipeline/ovm/1/instance/datasource/lodcz/1/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Triples output" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/datasource/lodcz/dataport/output> ;
 	.
 
 ### OVM analyzer instance, 2 inputs, config inherited from template ###
@@ -70,19 +70,19 @@
 	
 <http://payola.cz/resource/pipeline/ovm/1/instance/analyzer/ovm/1/input/ovm> a ldvm:DataPortInstance ;
 	dcterms:title "IPPs" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/ovm/input/ovm> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/analyzer/ovm/input/ovm> ;
 	ldvm:boundTo <http://payola.cz/resource/pipeline/ovm/1/instance/datasource/lodcz/1/output/1> ;
 	.
 	
 <http://payola.cz/resource/pipeline/ovm/1/instance/analyzer/ovm/1/input/pos> a ldvm:DataPortInstance ;
 	dcterms:title "IPP POSs" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
 	ldvm:boundTo <http://payola.cz/resource/pipeline/ovm/1/instance/datasource/lodcz/1/output/1> ;
 	.
 	
 <http://payola.cz/resource/pipeline/ovm/1/instance/analyzer/ovm/1/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPPs and POSes with geocoordinates" ;
-	ldvm:instanceOf <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
+	ldvm:dataportInstanceOf <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
 	.
 
 ### GMaps visualizer - template in ldvm-v-gmaps.ttl
@@ -95,6 +95,6 @@
 	
 <http://payola.cz/resource/pipeline/ovm/1/instance/visualizer/gmaps/1/input> a ldvm:DataPortInstance ;
 	dcterms:title "Points and descriptions" ;
-	ldvm:instanceOf v-gmaps-r:Input ;
+	ldvm:dataportInstanceOf v-gmaps-r:Input ;
 	ldvm:boundTo <http://payola.cz/resource/pipeline/ovm/1/instance/analyzer/ovm/1/output/1> ;
 	.
