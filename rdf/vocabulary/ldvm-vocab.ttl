@@ -82,7 +82,7 @@ ldvm:DataPortInstance a rdfs:Class;
 ldvm:inputTemplate a rdf:Property;
 	rdfs:label "Input Template"@en;
 	rdfs:domain ldvm:ComponentTemplate ;
-	rdfs:range ldvm:DataPortTemplate ;
+	rdfs:range ldvm:InputDataPortTemplate ;
 	.
 
 ldvm:inputInstance a rdf:Property;
@@ -151,7 +151,7 @@ ldvm:outputInstance a rdf:Property;
 ldvm:outputTemplate a rdf:Property;
 	rdfs:label "Output Template"@en;
 	rdfs:domain ldvm:ComponentTemplate ;
-	rdfs:range ldvm:DataPortTemplate ;
+	rdfs:range ldvm:OutputDataPortTemplate ;
 	.
 
 ldvm:outputDataSample a rdf:Property;
@@ -173,25 +173,31 @@ ldvm:appliesTo a rdf:Property;
 	
 ldvm:instanceOf a rdf:Property;
 	rdfs:label "Instance of"@en ;
-	rdfs:domain ldvm:ComponentTemplate ;
-	rdfs:range ldvm:ComponentInstance ;
+	rdfs:domain ldvm:ComponentInstance ;
+	rdfs:range ldvm:ComponentTemplate ;
 	.
 	
 ldvm:boundTo a rdf:Property;
-	rdfs:label "Bound To"@en ;
+	rdfs:label "Bound to"@en ;
 	rdfs:domain ldvm:DataPortInstance ;
 	rdfs:range ldvm:DataPortInstance ;
 	.
 	
 ldvm:nestedBoundTo a rdf:Property;
-	rdfs:label "Nested Bound To"@en ;
+	rdfs:label "Nested Bound to"@en ;
 	rdfs:comment "This is used for nesting of analyzers. Inner analyzers are instances, the outer analyzer is a template"@en ;
 	rdfs:domain ldvm:DataPortInstance ;
 	rdfs:range ldvm:DataPortTemplate ;
 	.
 
 ldvm:member a rdf:Property;
-    rdfs:label "Pipeline member"@en ;
+    rdfs:label "Pipeline mMmber"@en ;
     rdfs:domain ldvm:Pipeline ;
+    rdfs:range ldvm:ComponentInstance ;
+    .
+	
+ldvm:nestedMember a rdf:Property;
+    rdfs:label "Nested Component Member"@en ;
+    rdfs:domain ldvm:ComponentTemplate ;
     rdfs:range ldvm:ComponentInstance ;
     .
