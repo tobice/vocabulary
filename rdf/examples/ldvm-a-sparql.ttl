@@ -33,6 +33,20 @@ a-sparql:query a rdf:Property ;
 a-sparql-r:Configuration a a-sparql:SparqlAnalyzerConfiguration ;
 	dcterms:title "Default SPARQL Query" ;
 	a-sparql:query """CONSTRUCT {GRAPH ?g {?s ?p ?o}} WHERE {GRAPH ?g {?s ?p ?o}}""" ;
+	ldvm:configurationSPARQL """
+		PREFIX a-sparql: <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/>
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		
+		CONSTRUCT {
+			?config a-sparql:query ?query; 
+					dcterms:title ?title .
+		} 
+		WHERE {
+			?config a a a-sparql:SparqlAnalyzerConfiguration; 
+			OPTIONAL {?config a-sparql:query ?query . }
+			OPTIONAL {?config dcterms:title ?title . }
+		}
+		""" ;
 	.
 
 a-sparql-r:Input a ldvm:InputDataPortTemplate ;
