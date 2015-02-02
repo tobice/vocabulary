@@ -136,6 +136,13 @@ ldvm:componentConfigurationTemplate a rdf:Property;
 	rdfs:range ldvm:ComponentConfiguration ;
 	.
 
+ldvm:configurationSPARQL a rdf:Property;
+	rdfs:label "Configuration Template SPARQL"@en;
+	rdfs:comment "SPARQL query template to get a complete component configuration"@en; 
+	rdfs:domain ldvm:ComponentConfiguration ;
+	rdfs:range xsd:string ;
+	.
+
 ldvm:componentConfigurationInstance a rdf:Property;
 	rdfs:label "Configuration Instance"@en;
 	rdfs:domain ldvm:ComponentInstance ;
