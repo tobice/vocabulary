@@ -134,10 +134,10 @@
 	
 <http://payola.cz/resource/template/analyzer/coi.cz-inspections/feature/inspectionsAndNamesAndGeo> a ldvm:MandatoryFeature ;
 	dcterms:title "s:CheckActions and gr:legalNames of s:objects" ;
-	ldvm:signature <http://payola.cz/resource/template/analyzer/coi.cz-inspections/signature/inspectionsAndNamesAndGeo> ;
+	ldvm:descriptor <http://payola.cz/resource/template/analyzer/coi.cz-inspections/descriptor/inspectionsAndNamesAndGeo> ;
 	.
 	
-<http://payola.cz/resource/template/analyzer/coi.cz-inspections/signature/inspectionsAndNamesAndGeo> a ldvm:Signature ;
+<http://payola.cz/resource/template/analyzer/coi.cz-inspections/descriptor/inspectionsAndNamesAndGeo> a ldvm:Descriptor ;
 	dcterms:title "s:CheckActions and gr:legalNames of s:objects" ;
 	ldvm:query """
 		PREFIX gr: <http://purl.org/goodrelations/v1#>

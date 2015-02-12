@@ -40,15 +40,15 @@
 	
 <http://payola.cz/resource/template/analyzer/ovm/feature/ovm> a ldvm:MandatoryFeature ;
 	dcterms:title "IPPs" ;
-	ldvm:signature <http://payola.cz/resource/template/analyzer/ovm/signature/ovm> ;
+	ldvm:descriptor <http://payola.cz/resource/template/analyzer/ovm/descriptor/ovm> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/feature/pos> a ldvm:OptionalFeature ;
 	dcterms:title "IPP POSs" ;
-	ldvm:signature <http://payola.cz/resource/template/analyzer/ovm/signature/pos> ;
+	ldvm:descriptor <http://payola.cz/resource/template/analyzer/ovm/descriptor/pos> ;
 	.
 
-<http://payola.cz/resource/template/analyzer/ovm/signature/pos> a ldvm:Signature ;
+<http://payola.cz/resource/template/analyzer/ovm/descriptor/pos> a ldvm:Descriptor ;
 	dcterms:title "IPP POSs" ;
 	ldvm:query """
 		PREFIX s: <http://schema.org/>
@@ -68,7 +68,7 @@
 	ldvm:appliesTo <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
 	.
 
-<http://payola.cz/resource/template/analyzer/ovm/signature/ovm> a ldvm:Signature ;
+<http://payola.cz/resource/template/analyzer/ovm/descriptor/ovm> a ldvm:Descriptor ;
 	dcterms:title "IPPs" ;
 	ldvm:query """
 		PREFIX s: <http://schema.org/>

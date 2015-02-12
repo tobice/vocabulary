@@ -57,7 +57,7 @@ a-sparql-r:Output a ldvm:OutputDataPortTemplate ;
 	dcterms:title "RDF Data output" ;
 	.
 
-a-sparql-r:Signature a ldvm:Signature ;
+a-sparql-r:Descriptor a ldvm:Descriptor ;
 	dcterms:title "RDF data presence check" ;
 	ldvm:query """ASK {?s ?p ?o}""" ;
 	ldvm:appliesTo a-sparql-r:Input ;
@@ -65,6 +65,6 @@ a-sparql-r:Signature a ldvm:Signature ;
 
 a-sparql-r:Feature a ldvm:Feature ;
 	dcterms:title "Process RDF data" ;
-	ldvm:signature a-sparql-r:Signature ;
+	ldvm:descriptor a-sparql-r:Descriptor ;
 	.
 	

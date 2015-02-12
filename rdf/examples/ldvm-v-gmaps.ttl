@@ -37,20 +37,20 @@ v-gmaps-r:Input a ldvm:InputDataPortTemplate ;
 	
 v-gmaps-r:MarkersFeature a ldvm:MandatoryFeature ;
 	dcterms:title "Display markers on map" ;
-	ldvm:signature v-gmaps-r:MarkersSignature ;
+	ldvm:descriptor v-gmaps-r:MarkersDescriptor ;
 	.
 	
 v-gmaps-r:LabelsFeature a ldvm:OptionalFeature ;
 	dcterms:title "Display marker labels" ;
-	ldvm:signature v-gmaps-r:LabelsSignature ;
+	ldvm:descriptor v-gmaps-r:LabelsDescriptor ;
 	.
 	
 v-gmaps-r:BoxesFeature a ldvm:OptionalFeature ;
 	dcterms:title "Display marker descriptions" ;
-	ldvm:signature v-gmaps-r:BoxesSignature ;
+	ldvm:descriptor v-gmaps-r:BoxesDescriptor ;
 	.
 	
-v-gmaps-r:MarkersSignature a ldvm:Signature ;
+v-gmaps-r:MarkersDescriptor a ldvm:Descriptor ;
 	dcterms:title "Geopoint data presence check" ;
 	ldvm:query """
 		PREFIX s: <http://schema.org/>
@@ -65,7 +65,7 @@ v-gmaps-r:MarkersSignature a ldvm:Signature ;
 	ldvm:appliesTo v-gmaps-r:Input ;
 	.
 
-v-gmaps-r:LabelsSignature a ldvm:Signature ;
+v-gmaps-r:LabelsDescriptor a ldvm:Descriptor ;
 	dcterms:title "Geopoint label presence check" ;
 	ldvm:query """
 		PREFIX s: <http://schema.org/>
@@ -81,7 +81,7 @@ v-gmaps-r:LabelsSignature a ldvm:Signature ;
 	ldvm:appliesTo v-gmaps-r:Input ;
 	.
 
-v-gmaps-r:BoxesSignature a ldvm:Signature ;
+v-gmaps-r:BoxesDescriptor a ldvm:Descriptor ;
 	dcterms:title "Geopoint description presence check" ;
 	ldvm:query """
 		PREFIX s: <http://schema.org/>

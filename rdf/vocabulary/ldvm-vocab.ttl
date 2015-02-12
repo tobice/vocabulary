@@ -113,9 +113,9 @@ ldvm:OptionalFeature a rdfs:Class;
 	rdfs:comment "Linked Data Visualization Model Optional Feature"@en;
 	.
 
-ldvm:Signature a rdfs:Class;
-	rdfs:label "LDVM Signature"@en;
-	rdfs:comment "Linked Data Visualization Model Signature"@en;
+ldvm:Descriptor a rdfs:Class;
+	rdfs:label "LDVM Descriptor"@en;
+	rdfs:comment "Linked Data Visualization Model Descriptor"@en;
 	.
 
 ldvm:feature a rdf:Property;
@@ -124,10 +124,10 @@ ldvm:feature a rdf:Property;
 	rdfs:range ldvm:Feature ;
 	.
 
-ldvm:signature a rdf:Property;
-	rdfs:label "Signature"@en;
+ldvm:descriptor a rdf:Property;
+	rdfs:label "Descriptor"@en;
 	rdfs:domain ldvm:Feature ;
-	rdfs:range ldvm:Signature ;
+	rdfs:range ldvm:Descriptor ;
 	.
 	
 ldvm:componentConfigurationTemplate a rdf:Property;
@@ -168,13 +168,13 @@ ldvm:outputDataSample a rdf:Property;
 
 ldvm:query a rdf:Property;
 	rdfs:label "Query"@en;
-	rdfs:domain ldvm:Signature;
+	rdfs:domain ldvm:Descriptor;
 	rdfs:range xsd:string ;
 	.
 	
 ldvm:appliesTo a rdf:Property;
 	rdfs:label "Applies to"@en;
-	rdfs:domain ldvm:Signature;
+	rdfs:domain ldvm:Descriptor;
 	rdfs:range ldvm:InputDataPortTemplate ;
 	.
 	
