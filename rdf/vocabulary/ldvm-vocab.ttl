@@ -45,6 +45,18 @@ ldvm:AnalyzerInstance a rdfs:Class;
 	rdfs:subClassOf ldvm:DataSourceInstance ;
 	.
 
+ldvm:TransformerTemplate a rdfs:Class;
+	rdfs:label "LDVM Transformer Template"@en;
+	rdfs:comment "Linked Data Visualization Model Transformer Template"@en;
+	rdfs:subClassOf ldvm:AnalyzerTemplate ;
+	.
+
+ldvm:TransformerInstance a rdfs:Class;
+	rdfs:label "LDVM Transformer Instance"@en;
+	rdfs:comment "Linked Data Visualization Model Transformer Instance"@en;
+	rdfs:subClassOf ldvm:AnalyzerInstance ;
+	.
+
 ldvm:VisualizerTemplate a rdfs:Class;
 	rdfs:label "LDVM Visualizer Template"@en;
 	rdfs:comment "Linked Data Visualization Model Visualizer Template"@en;
@@ -204,7 +216,7 @@ ldvm:nestedBoundTo a rdf:Property;
 	.
 
 ldvm:member a rdf:Property;
-    rdfs:label "Pipeline mMmber"@en ;
+    rdfs:label "Pipeline member"@en ;
     rdfs:domain ldvm:Pipeline ;
     rdfs:range ldvm:ComponentInstance ;
     .
