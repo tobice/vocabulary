@@ -3,149 +3,195 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix void:  <http://rdfs.org/ns/void#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann:  <http://purl.org/vocab/vann/> .
+@prefix voaf:  <http://purl.org/vocommons/voaf#> .
+@prefix cc:    <http://creativecommons.org/ns#> .
+@prefix vs:    <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
 @prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+
+ldvm: a owl:Ontology, voaf:Vocabulary;
+	dcterms:title "Vocabulary for Linked Data Visualization Model"@en ;
+	dcterms:description "Vocabulary for Linked Data Visualization Model (LDVM) serves for description and configuration of components and pipelines according to LDVM"@en ;
+	vann:preferredNamespaceUri "http://linked.opendata.cz/ontology/ldvm/" ;
+	vann:preferredNamespacePrefix "ldvm" ;
+	dcterms:creator <http://purl.org/klimek#me> ;
+	dcterms:creator <http://helmich.cz/#me> ;
+	dcterms:issued "2015-02-15"^^xsd:date;
+	dcterms:modified "2015-02-15"^^xsd:date;
+	cc:licence <http://creativecommons.org/licenses/by/4.0> ;
+	dcterms:publisher <http://opendata.cz> ;
+	owl:versionInfo "0.1"^^xsd:decimal ;
+	.
 
 ldvm:Pipeline a rdfs:Class;
 	rdfs:label "LDVM Pipeline"@en;
 	rdfs:comment "Linked Data Visualization Model Pipeline"@en;
+	rdfs:isDefinedBy ldvm: ;
+	vs:term_status "stable" ;
 	.
 
 ldvm:ComponentTemplate a rdfs:Class ;
 	rdfs:label "LDVM Component Template"@en;
 	rdfs:comment "Linked Data Visualization Model Component Template"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:ComponentInstance a rdfs:Class ;
 	rdfs:label "LDVM Component Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Component Instance"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:DataSourceTemplate a rdfs:Class;
 	rdfs:label "LDVM Data Source Template"@en;
 	rdfs:comment "Linked Data Visualization Model Data Source Template"@en;
 	rdfs:subClassOf ldvm:ComponentTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:DataSourceInstance a rdfs:Class;
 	rdfs:label "LDVM Data Source Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Data Source Instance"@en;
 	rdfs:subClassOf ldvm:ComponentInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:AnalyzerTemplate a rdfs:Class;
 	rdfs:label "LDVM Analyzer Template"@en;
 	rdfs:comment "Linked Data Visualization Model Analyzer Template"@en;
 	rdfs:subClassOf ldvm:DataSourceTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:AnalyzerInstance a rdfs:Class;
 	rdfs:label "LDVM Analyzer Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Analyzer Instance"@en;
 	rdfs:subClassOf ldvm:DataSourceInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:TransformerTemplate a rdfs:Class;
 	rdfs:label "LDVM Transformer Template"@en;
 	rdfs:comment "Linked Data Visualization Model Transformer Template"@en;
 	rdfs:subClassOf ldvm:AnalyzerTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:TransformerInstance a rdfs:Class;
 	rdfs:label "LDVM Transformer Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Transformer Instance"@en;
 	rdfs:subClassOf ldvm:AnalyzerInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:VisualizerTemplate a rdfs:Class;
 	rdfs:label "LDVM Visualizer Template"@en;
 	rdfs:comment "Linked Data Visualization Model Visualizer Template"@en;
 	rdfs:subClassOf ldvm:ComponentTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:VisualizerInstance a rdfs:Class;
 	rdfs:label "LDVM Visualizer Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Visualizer Instance"@en;
 	rdfs:subClassOf ldvm:ComponentInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:DataPortTemplate a rdfs:Class;
 	rdfs:label "LDVM Data Port Template"@en;
 	rdfs:comment "Linked Data Visualization Model Data Port Template"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:InputDataPortTemplate a rdfs:Class;
 	rdfs:label "LDVM Input Data Port Template"@en;
 	rdfs:comment "Linked Data Visualization Model Input Data Port Template"@en;
 	rdfs:subClassOf ldvm:DataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:OutputDataPortTemplate a rdfs:Class;
 	rdfs:label "LDVM Output Data Port Template"@en;
 	rdfs:comment "Linked Data Visualization Model Output Data Port Template"@en;
 	rdfs:subClassOf ldvm:DataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:DataPortInstance a rdfs:Class;
 	rdfs:label "LDVM Data Port Instance"@en;
 	rdfs:comment "Linked Data Visualization Model Data Port Instance"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:inputTemplate a rdf:Property;
 	rdfs:label "Input Template"@en;
 	rdfs:domain ldvm:ComponentTemplate ;
 	rdfs:range ldvm:InputDataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:inputInstance a rdf:Property;
 	rdfs:label "Input Instance"@en;
 	rdfs:domain ldvm:ComponentInstance ;
 	rdfs:range ldvm:DataPortInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:ComponentConfiguration a rdfs:Class;
 	rdfs:label "LDVM Component Configuration"@en;
 	rdfs:comment "Linked Data Visualization Model Component Configuration"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:Feature a rdfs:Class;
 	rdfs:label "LDVM Feature"@en;
 	rdfs:comment "Linked Data Visualization Model Feature"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:MandatoryFeature a rdfs:Class;
 	rdfs:label "LDVM Mandatory Feature"@en;
 	rdfs:subClassOf ldvm:Feature ;
 	rdfs:comment "Linked Data Visualization Model Mandatory Feature"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:OptionalFeature a rdfs:Class;
 	rdfs:label "LDVM Optional Feature"@en;
 	rdfs:subClassOf ldvm:Feature ;
 	rdfs:comment "Linked Data Visualization Model Optional Feature"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:Descriptor a rdfs:Class;
 	rdfs:label "LDVM Descriptor"@en;
 	rdfs:comment "Linked Data Visualization Model Descriptor"@en;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:feature a rdf:Property;
 	rdfs:label "Feature"@en;
 	rdfs:domain ldvm:ComponentTemplate ;
 	rdfs:range ldvm:Feature ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:descriptor a rdf:Property;
 	rdfs:label "Descriptor"@en;
 	rdfs:domain ldvm:Feature ;
 	rdfs:range ldvm:Descriptor ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:componentConfigurationTemplate a rdf:Property;
 	rdfs:label "Configuration Template"@en;
 	rdfs:domain ldvm:ComponentTemplate ;
 	rdfs:range ldvm:ComponentConfiguration ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:configurationSPARQL a rdf:Property;
@@ -153,59 +199,69 @@ ldvm:configurationSPARQL a rdf:Property;
 	rdfs:comment "SPARQL query template to get a complete component configuration"@en; 
 	rdfs:domain ldvm:ComponentConfiguration ;
 	rdfs:range xsd:string ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:componentConfigurationInstance a rdf:Property;
 	rdfs:label "Configuration Instance"@en;
 	rdfs:domain ldvm:ComponentInstance ;
 	rdfs:range ldvm:ComponentConfiguration ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:outputInstance a rdf:Property;
 	rdfs:label "Output Instance"@en;
 	rdfs:domain ldvm:ComponentInstance ;
 	rdfs:range ldvm:DataPortInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:outputTemplate a rdf:Property;
 	rdfs:label "Output Template"@en;
 	rdfs:domain ldvm:ComponentTemplate ;
 	rdfs:range ldvm:OutputDataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:outputDataSample a rdf:Property;
 	rdfs:label "Output Data Sample"@en;
 	rdfs:domain ldvm:OutputDataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:query a rdf:Property;
 	rdfs:label "Query"@en;
 	rdfs:domain ldvm:Descriptor;
 	rdfs:range xsd:string ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:appliesTo a rdf:Property;
 	rdfs:label "Applies to"@en;
 	rdfs:domain ldvm:Descriptor;
 	rdfs:range ldvm:InputDataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:instanceOf a rdf:Property;
 	rdfs:label "Instance of"@en ;
 	rdfs:domain ldvm:ComponentInstance ;
 	rdfs:range ldvm:ComponentTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:dataportInstanceOf a rdf:Property;
 	rdfs:label "Instance of Dataport Template"@en ;
 	rdfs:domain ldvm:DataPortInstance ;
 	rdfs:range ldvm:DataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:boundTo a rdf:Property;
 	rdfs:label "Bound to"@en ;
 	rdfs:domain ldvm:DataPortInstance ;
 	rdfs:range ldvm:DataPortInstance ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 	
 ldvm:nestedBoundTo a rdf:Property;
@@ -213,16 +269,19 @@ ldvm:nestedBoundTo a rdf:Property;
 	rdfs:comment "This is used for nesting of analyzers. Inner analyzers are instances, the outer analyzer is a template"@en ;
 	rdfs:domain ldvm:DataPortInstance ;
 	rdfs:range ldvm:DataPortTemplate ;
+	rdfs:isDefinedBy ldvm: ;
 	.
 
 ldvm:member a rdf:Property;
     rdfs:label "Pipeline member"@en ;
     rdfs:domain ldvm:Pipeline ;
     rdfs:range ldvm:ComponentInstance ;
+	rdfs:isDefinedBy ldvm: ;
     .
 	
 ldvm:nestedPipeline a rdf:Property;
     rdfs:label "Nested Pipeline"@en ;
     rdfs:domain ldvm:ComponentTemplate ;
     rdfs:range ldvm:Pipeline ;
+	rdfs:isDefinedBy ldvm: ;
     .
