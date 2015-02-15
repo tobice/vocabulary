@@ -221,8 +221,8 @@ ldvm:member a rdf:Property;
     rdfs:range ldvm:ComponentInstance ;
     .
 	
-ldvm:nestedMember a rdf:Property;
-    rdfs:label "Nested Component Member"@en ;
+ldvm:nestedPipeline a rdf:Property;
+    rdfs:label "Nested Pipeline"@en ;
     rdfs:domain ldvm:ComponentTemplate ;
-    rdfs:range ldvm:ComponentInstance ;
+    rdfs:range ldvm:Pipeline ;
     .
