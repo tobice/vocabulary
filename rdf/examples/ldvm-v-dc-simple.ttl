@@ -13,7 +13,7 @@ v-dc-r:DataCubeVisualizerTemplate a ldvm:VisualizerTemplate ;
 	rdfs:label "DataCube visualizer"@en;
 	rdfs:comment "Enables a user to explore data cubes using slicing and dicing"@en;
 	ldvm:componentConfigurationTemplate v-dc-r:Configuration ;
-	ldvm:inputTemplate v-dc-r:DataStructureInput, v-dc-r:DataInput ;
+	ldvm:inputTemplate v-dc-r:DataInput ;
 	ldvm:feature v-dc-r:DataStructuresFeature,
 					v-dc-r:DataStructureLabelsFeature,
 					v-dc-r:DataStructureComponentOrderingFeature,
