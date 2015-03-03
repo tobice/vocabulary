@@ -31,8 +31,12 @@ v-dc-r:Configuration a v-gmaps:DataCubeVisualizerConfiguration ;
 	dcterms:title "Default Configuration" ;
 	.
 
-v-dc-r:Input a ldvm:InputDataPortTemplate ;
-	dcterms:title "DataCube with labels" ;
+v-dc-r:DataInput a ldvm:InputDataPortTemplate ;
+	dcterms:title "DataCube data" ;
+	.
+	
+v-dc-r:DataStructureInput a ldvm:InputDataPortTemplate ;
+	dcterms:title "DataCube structure with labels" ;
 	.
 	
 v-dc-r:DataStructuresFeature a ldvm:MandatoryFeature ;
