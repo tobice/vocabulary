@@ -9,7 +9,7 @@
 @prefix v-dc:    <http://linked.opendata.cz/ontology/ldvm/visualizer/data-cube-simple/> .
 @prefix v-dc-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/data-cube-simple/> .
 
-v-dc-r:GoogleMapsVisualizerTemplate a ldvm:VisualizerTemplate ;
+v-dc-r:DataCubeVisualizerTemplate a ldvm:VisualizerTemplate ;
 	rdfs:label "DataCube visualizer"@en;
 	rdfs:comment "Enables a user to explore data cubes using slicing and dicing"@en;
 	ldvm:componentConfigurationTemplate v-dc-r:Configuration ;
