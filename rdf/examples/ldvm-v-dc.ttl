@@ -1,1 +1,121 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
+@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix v-dc:    <http://linked.opendata.cz/ontology/ldvm/visualizer/data-cube/> .
+@prefix v-dc-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/data-cube/> .
+
+v-dc-r:GoogleMapsVisualizerTemplate a ldvm:VisualizerTemplate ;
+	rdfs:label "DataCube visualizer"@en;
+	rdfs:comment "Enables a user to explore data cubes using slicing and dicing"@en;
+	ldvm:componentConfigurationTemplate v-dc-r:Configuration ;
+	ldvm:inputTemplate v-dc-r:DataStructureInput, v-dc-r:DataInput ;
+	ldvm:feature v-dc-r:DataStructuresFeature,
+					v-dc-r:DataStructureLabelsFeature,
+					v-dc-r:DataStructureComponentOrderingFeature,
+					v-dc-r:ObservationsFeature ;
+	.
+
+v-gmaps:GoogleMapsVisualizerConfiguration a rdfs:Class ;
+	rdfs:label "Google Maps Visualizer Configuration"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+
+### define properties etc. ###
+	
+v-dc-r:Configuration a v-gmaps:DataCubeVisualizerConfiguration ;
+	dcterms:title "Default Configuration" ;
+	.
+
+v-dc-r:Input a ldvm:InputDataPortTemplate ;
+	dcterms:title "DataCube with labels" ;
+	.
+	
+v-dc-r:DataStructuresFeature a ldvm:MandatoryFeature ;
+	dcterms:title "Builds configuration UI based on DC structure" ;
+	ldvm:descriptor v-dc-r:DataStructuresDescriptor ;
+	.
+	
+v-dc-r:DataStructureLabelsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Display data labels" ;
+	ldvm:descriptor v-dc-r:DataStructureLabelsDescriptor ;
+	.
+	
+v-dc-r:DataStructureComponentOrderingFeature a ldvm:OptionalFeature ;
+	dcterms:title "Explicit ordering of dimensions and measures" ;
+	ldvm:descriptor v-dc-r:DataStructureComponentOrderingDescriptor ;
+	.
+	
+v-dc-r:ObservationsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Visualize cube data" ;
+	ldvm:descriptor v-dc-r:ObservationsDescriptor ;
+	.
+	
+v-dc-r:DataStructuresDescriptor a ldvm:Descriptor ;
+	dcterms:title "DataStructure presence check" ;
+	ldvm:query """
+		PREFIX qb: <http://purl.org/linked-data/cube#>
+		
+		ASK {
+			?x a qb:DataStructureDefinition ;
+			   qb:component ?cd ;
+			   qb:component ?cm .
+
+			?cd qb:dimension ?d .
+			?cm qb:measure ?m .
+		}
+	""" ;
+	ldvm:appliesTo v-dc-r:DataStructureInput ;
+	.
+
+v-dc-r:DataStructureLabelsDescriptor a ldvm:Descriptor ;
+	dcterms:title "SKOS prefLabel presence check." ;
+	ldvm:query """
+		PREFIX qb: <http://purl.org/linked-data/cube#>
+		
+		ASK {
+			?x a qb:DataStructureDefinition ;
+				qb:component ?cd ;
+				qb:component ?cm .
+        		skos:prefLabel ?xl ;
+
+			?cd qb:dimension ?d ;
+        		skos:prefLabel ?cdl .
+			?cm qb:measure ?m ;
+        		skos:prefLabel ?cml .
+		}
+	""" ;
+	ldvm:appliesTo v-dc-r:DataStructureInput ;
+	.
+
+v-dc-r:DataStructureComponentOrderingDescriptor a ldvm:Descriptor ;
+	dcterms:title "Check for explicit DSD ordering." ;
+	ldvm:query """
+		PREFIX qb: <http://purl.org/linked-data/cube#>
+		
+		ASK {
+			?x a qb:DataStructureDefinition ;
+				qb:component ?c .
+
+			?cd qb:order ?o .
+		}
+	""" ;
+	ldvm:appliesTo v-dc-r:DataStructureInput ;
+	.
+
+v-dc-r:ObservationsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Data presence." ;
+	ldvm:query """
+		PREFIX qb: <http://purl.org/linked-data/cube#>
+		
+		ASK {
+			[] a qb:Observation ;
+			   ?d ?v .		
+		}
+	""" ;
+	ldvm:appliesTo v-dc-r:DataInput ;
+	.
