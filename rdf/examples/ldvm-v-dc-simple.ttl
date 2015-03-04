@@ -20,8 +20,8 @@ v-dc-r:DataCubeVisualizerTemplate a ldvm:VisualizerTemplate ;
 					v-dc-r:ObservationsFeature ;
 	.
 
-v-gmaps:GoogleMapsVisualizerConfiguration a rdfs:Class ;
-	rdfs:label "Google Maps Visualizer Configuration"@en;
+v-dc-r:DataCubeVisualizerConfiguration a rdfs:Class ;
+	rdfs:label "DataCube visualizer"@en;
 	rdfs:subClassOf ldvm:ComponentConfiguration ;
 	.
 
