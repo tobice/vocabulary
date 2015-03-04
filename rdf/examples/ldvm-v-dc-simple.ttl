@@ -27,7 +27,7 @@ v-dc-r:DataCubeVisualizerConfiguration a rdfs:Class ;
 
 ### define properties etc. ###
 	
-v-dc-r:Configuration a v-gmaps:DataCubeVisualizerConfiguration ;
+v-dc-r:Configuration a v-dc-r:DataCubeVisualizerConfiguration ;
 	dcterms:title "Default Configuration" ;
 	.
 
