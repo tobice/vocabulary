@@ -19,12 +19,12 @@
 	dcterms:title "Triples output" ;
 	.
 	
-<http://payola.cz/resource/template/datasource/lodcz/configuration/default> a d-sparql:SparqlEndpointDataSourceConfiguration ;
+<http://payola.cz/resource/template/datasource/internal-lodcz/configuration/default> a d-sparql:SparqlEndpointDataSourceConfiguration ;
 	dcterms:title "internal.opendata.cz" ;
 	d-sparql:service <http://payola.cz/resource/template/datasource/internal-lodcz/configuration/default/Service> ;
 	.
 
-<http://payola.cz/resource/template/datasource/lodcz/configuration/default/Service> a sd:Service ;
-	sd:endpoint <http://internal.opendata.cz/sparql> ;
+<http://payola.cz/resource/template/datasource/internal-lodcz/configuration/default/Service> a sd:Service ;
+	sd:endpoint <http://internal.opendata.cz:8890/sparql> ;
 	.
 	
