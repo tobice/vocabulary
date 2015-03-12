@@ -138,13 +138,13 @@
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/input/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPP triples input" ;
-	ldvm:instanceOf a-sparql-r:Input ;
+	ldvm:dataportInstanceOf a-sparql-r:Input ;
 	ldvm:nestedBoundTo <http://payola.cz/resource/template/analyzer/ovm/input/ovm> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPP triples output" ;
-	ldvm:instanceOf a-sparql-r:Output ;
+	ldvm:dataportInstanceOf a-sparql-r:Output ;
 	.
 
 ## Inner Analyzer 2 - POSes
@@ -196,13 +196,13 @@
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/input/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPP POSs triples input" ;
-	ldvm:instanceOf a-sparql-r:Input ;
+	ldvm:dataportInstanceOf a-sparql-r:Input ;
 	ldvm:nestedBoundTo <http://payola.cz/resource/template/analyzer/ovm/input/pos> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "IPP POSs triples output" ;
-	ldvm:instanceOf a-sparql-r:Output ;
+	ldvm:dataportInstanceOf a-sparql-r:Output ;
 	.
 
 ## Inner Union
@@ -215,12 +215,12 @@
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/union/input/1> a ldvm:DataPortInstance ;
 	dcterms:title "Triples to merge" ;
-	ldvm:instanceOf a-union-r:Input ;
+	ldvm:dataportInstanceOf a-union-r:Input ;
 	ldvm:boundTo <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos/output/1>, <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm/output/1> ;
 	.
 
 <http://payola.cz/resource/template/analyzer/ovm/instance/union/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Union triples output" ;
-	ldvm:instanceOf a-union-r:Output ;
+	ldvm:dataportInstanceOf a-union-r:Output ;
 	ldvm:nestedBoundTo <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
 	.
