@@ -1,0 +1,155 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+
+@prefix a-sparql-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/sparql/> .
+@prefix a-sparql:    <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/> .
+@prefix a-union:    <http://linked.opendata.cz/ontology/ldvm/analyzer/union/> .
+@prefix a-union-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/union/> .
+@prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+
+### Analyzer that extracts data about Towns (Obce) from RUIAN ###
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce> a ldvm:AnalyzerTemplate ;
+	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> ;
+	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> ;
+	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ovm> ;
+	ldvm:nestedPipeline <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> a ldvm:InputDataPortTemplate ;
+	dcterms:title "RUIAN@en, "RUIAN"@cs ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> a ldvm:OutputDataPortTemplate ;
+	dcterms:title "Obce z RUIAN"@cs, "Towns from RUIAN"@en ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-ruian-obce-datasample.ttl> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ovm> a ldvm:MandatoryFeature ;
+	dcterms:title "Extract Towns"@en ;
+	ldvm:descriptor <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/descriptor/ruian> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/descriptor/ruian> a ldvm:Descriptor ;
+	dcterms:title "RUIAN obce" ;
+	ldvm:query """
+		prefix xsd:	<http://www.w3.org/2001/XMLSchema#> 
+		prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+		prefix skos:	<http://www.w3.org/2004/02/skos/core#> 
+		prefix s:	<http://schema.org/> 
+		prefix ogcgml:	<http://www.opengis.net/ont/gml#> 
+
+		prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> 
+
+		ASK {
+		?obec	
+			rdf:type	ruian:Obec ;
+			skos:notation	?notation ;
+			s:name	?name ;
+			ruian:definicniBod	?definicniBod ;
+			ruian:lau	?lau ;
+			ruian:okres	?okres ;
+			ruian:pou	?pou 
+			.
+			
+		?definicniBod	rdf:type	ogcgml:MultiPoint ;
+			ogcgml:pointMember	?pointMember .
+			
+		?pointMember rdf:type	ogcgml:Point ;
+			ogcgml:pos	?pos ;
+			s:geo ?geo .
+
+		?geo	rdf:type	s:GeoCoordinates ;
+			s:longitude	?lng ;
+			s:latitude	?lat .
+			
+		?pou s:name ?pouname .
+		}
+	""" ;
+	ldvm:appliesTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1> a ldvm:Pipeline ;
+	ldvm:member <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql> a ldvm:AnalyzerInstance ;
+	ldvm:instanceOf a-sparql-r:SparqlAnalyzerTemplate ;
+	ldvm:inputInstance <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/input/1> ;
+	ldvm:outputInstance <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/output/1> ;
+	ldvm:componentConfigurationInstance <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/configuration> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/configuration> a a-sparql:SparqlAnalyzerConfiguration ;
+	dcterms:title "Query extracting Towns"@en, "Dotaz extrahující obce"@cs ;
+	a-sparql:query """	
+		prefix xsd:	<http://www.w3.org/2001/XMLSchema#> 
+		prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+		prefix skos:	<http://www.w3.org/2004/02/skos/core#> 
+		prefix s:	<http://schema.org/> 
+		prefix ogcgml:	<http://www.opengis.net/ont/gml#> 
+
+		prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> 
+
+		CONSTRUCT {
+		?obec	
+			rdf:type	ruian:Obec ;
+			skos:notation	?notation ;
+			s:name	?name ;
+			ruian:definicniBod	?definicniBod ;
+			ruian:lau	?lau ;
+			ruian:okres	?okres ;
+			ruian:pou	?pou 
+			.
+			
+		?definicniBod	rdf:type	ogcgml:MultiPoint ;
+			ogcgml:pointMember	?pointMember .
+			
+		?pointMember rdf:type	ogcgml:Point ;
+			ogcgml:pos	?pos ;
+			s:geo ?geo .
+
+		?geo	rdf:type	s:GeoCoordinates ;
+			s:longitude	?lng ;
+			s:latitude	?lat .
+		}
+		WHERE {
+		?obec	
+			rdf:type	ruian:Obec ;
+			skos:notation	?notation ;
+			s:name	?name ;
+			ruian:definicniBod	?definicniBod ;
+			ruian:lau	?lau ;
+			ruian:okres	?okres ;
+			ruian:pou	?pou 
+			.
+			
+		?definicniBod	rdf:type	ogcgml:MultiPoint ;
+			ogcgml:pointMember	?pointMember .
+			
+		?pointMember rdf:type	ogcgml:Point ;
+			ogcgml:pos	?pos ;
+			s:geo ?geo .
+
+		?geo	rdf:type	s:GeoCoordinates ;
+			s:longitude	?lng ;
+			s:latitude	?lat .
+		}	
+	""" ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/input/1> a ldvm:DataPortInstance ;
+	dcterms:title "RUIAN data obsahující obce" ;
+	ldvm:dataportInstanceOf a-sparql-r:Input ;
+	ldvm:nestedBoundTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "Obce" ;
+	ldvm:nestedBoundTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> ;
+
+	.

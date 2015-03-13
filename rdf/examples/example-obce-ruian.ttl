@@ -1,0 +1,13 @@
+@prefix ruianlink: <http://ruian.linked.opendata.cz/ontology/links/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<http://linked.opendata.cz/resource/temp/myplace>
+	dcterms:title "My place";
+	ruianlink:obec <http://ruian.linked.opendata.cz/resource/obce/554782>;
+	.
+	
+<http://linked.opendata.cz/resource/temp/myplace2>
+	dcterms:title "My place 2";
+	ruianlink:obec <http://ruian.linked.opendata.cz/resource/obce/563889>;
+	.
+	
