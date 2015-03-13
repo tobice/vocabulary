@@ -21,7 +21,7 @@
 	.
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> a ldvm:InputDataPortTemplate ;
-	dcterms:title "RUIAN@en, "RUIAN"@cs ;
+	dcterms:title "RUIAN"@en, "RUIAN"@cs ;
 	.
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> a ldvm:OutputDataPortTemplate ;
@@ -150,6 +150,7 @@
 
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1/sparql/output/1> a ldvm:DataPortInstance ;
 	dcterms:title "Obce" ;
+	ldvm:dataportInstanceOf a-sparql-r:Output ;
 	ldvm:nestedBoundTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> ;
 
 	.

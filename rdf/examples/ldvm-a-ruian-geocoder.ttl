@@ -20,11 +20,11 @@
 	.
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/dataset> a ldvm:InputDataPortTemplate ;
-	dcterms:title "Dataset to be geocoded@en, "Dataset na geokódování"@cs ;
+	dcterms:title "Dataset to be geocoded"@en, "Dataset na geokódování"@cs ;
 	.
 
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/ruian> a ldvm:InputDataPortTemplate ;
-	dcterms:title "RUIAN@en, "RUIAN"@cs ;
+	dcterms:title "RUIAN"@en, "RUIAN"@cs ;
 	.
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/output> a ldvm:OutputDataPortTemplate ;
