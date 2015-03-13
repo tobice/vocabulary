@@ -16,7 +16,7 @@
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce> a ldvm:AnalyzerTemplate ;
 	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> ;
 	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> ;
-	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ovm> ;
+	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ruian> ;
 	ldvm:nestedPipeline <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/instance/1> ;
 	.
 	
@@ -29,7 +29,7 @@
 	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-ruian-obce-datasample.ttl> ;
 	.
 	
-<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ovm> a ldvm:MandatoryFeature ;
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ruian> a ldvm:MandatoryFeature ;
 	dcterms:title "Extract Towns"@en ;
 	ldvm:descriptor <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/descriptor/ruian> ;
 	.

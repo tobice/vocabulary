@@ -1,0 +1,90 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+
+@prefix a-sparql-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/sparql/> .
+@prefix a-sparql:    <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/> .
+@prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+
+### Analyzer that geocodes dataset linked to RUIAN Towns ###
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder> a ldvm:AnalyzerTemplate ;
+	dcterms:title "RUIAN Towns geocoder"@en ;
+	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/dataset> ;
+	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/ruian> ;
+	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/output> ;
+	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/feature/geocode> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/dataset> a ldvm:InputDataPortTemplate ;
+	dcterms:title "Dataset to be geocoded@en, "Dataset na geokódování"@cs ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/ruian> a ldvm:InputDataPortTemplate ;
+	dcterms:title "RUIAN@en, "RUIAN"@cs ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/output> a ldvm:OutputDataPortTemplate ;
+	dcterms:title "Geokódované objekty"@cs, "Geocoded objects"@en ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-ruian-geo-datasample.ttl> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/feature/geocode> a ldvm:MandatoryFeature ;
+	dcterms:title "Geocode using ruian objects"@en ;
+	ldvm:descriptor <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/descriptor/ruian> ;
+	ldvm:descriptor <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/descriptor/dataset> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/descriptor/ruian> a ldvm:Descriptor ;
+	dcterms:title "RUIAN objects with geocodes" ;
+	ldvm:query """
+		prefix xsd:	<http://www.w3.org/2001/XMLSchema#> 
+		prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+		prefix skos:	<http://www.w3.org/2004/02/skos/core#> 
+		prefix s:	<http://schema.org/> 
+		prefix ogcgml:	<http://www.opengis.net/ont/gml#> 
+
+		prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> 
+
+		ASK {
+		?object	
+			ruian:definicniBod	?definicniBod ;
+			.
+			
+		?definicniBod	rdf:type	ogcgml:MultiPoint ;
+			ogcgml:pointMember	?pointMember .
+			
+		?pointMember rdf:type	ogcgml:Point ;
+			s:geo ?geo .
+
+		?geo	rdf:type	s:GeoCoordinates ;
+			s:longitude	?lng ;
+			s:latitude	?lat .
+		}
+	""" ;
+	ldvm:appliesTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/ruian> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/descriptor/dataset> a ldvm:Descriptor ;
+	dcterms:title "Dataset with links to RUIAN Towns" ;
+	ldvm:query """
+		prefix xsd:	<http://www.w3.org/2001/XMLSchema#> 
+		prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+		prefix skos:	<http://www.w3.org/2004/02/skos/core#> 
+		prefix s:	<http://schema.org/> 
+		prefix ogcgml:	<http://www.opengis.net/ont/gml#> 
+
+		prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> 
+		prefix ruianlink: <http://ruian.linked.opendata.cz/ontology/links/> 
+
+		ASK {
+		?object	
+			ruianlink:obec	?obec ;
+			.
+		}
+	""" ;
+	ldvm:appliesTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/dataset> ;
+	.
