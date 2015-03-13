@@ -20,9 +20,14 @@
 	ldvm:outputTemplate <http://payola.cz/resource/template/analyzer/ovm/output/1> ;
 	ldvm:feature <http://payola.cz/resource/template/analyzer/ovm/feature/ovm> ;
 	ldvm:feature <http://payola.cz/resource/template/analyzer/ovm/feature/pos> ;
-	ldvm:nestedMember <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm> ;
-	ldvm:nestedMember <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos> ;
-	ldvm:nestedMember <http://payola.cz/resource/template/analyzer/ovm/instance/union> ;
+	ldvm:nestedPipeline <http://payola.cz/resource/template/analyzer/ovm/instance/1> ;
+	.
+
+<http://payola.cz/resource/template/analyzer/ovm/instance/1> a ldvm:Pipeline ;
+	dcterms:title "Institutions of Public Power nested pipeline"@en, "Orgány veřejné moci - vnořená pipeline"@cs ;
+	ldvm:member <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/ovm> ;
+	ldvm:member <http://payola.cz/resource/template/analyzer/ovm/instance/sparql/pos> ;
+	ldvm:member <http://payola.cz/resource/template/analyzer/ovm/instance/union> ;
 	.
 	
 <http://payola.cz/resource/template/analyzer/ovm/input/ovm> a ldvm:InputDataPortTemplate ;
