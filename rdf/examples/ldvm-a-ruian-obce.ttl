@@ -14,6 +14,7 @@
 ### Analyzer that extracts data about Towns (Obce) from RUIAN ###
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce> a ldvm:AnalyzerTemplate ;
+	dcterms:title "RUIAN Towns extractor"@en ;
 	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/input> ;
 	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/output> ;
 	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/ruian/obce/feature/ruian> ;
