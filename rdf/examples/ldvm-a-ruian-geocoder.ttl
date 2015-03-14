@@ -50,9 +50,8 @@
 		prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> 
 
 		ASK {
-		?object	
-			ruian:definicniBod	?definicniBod ;
-			.
+		?object	ruian:definicniBod	?definicniBod .
+			
 			
 		?definicniBod	rdf:type	ogcgml:MultiPoint ;
 			ogcgml:pointMember	?pointMember .
