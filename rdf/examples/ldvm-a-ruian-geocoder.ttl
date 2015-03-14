@@ -29,7 +29,7 @@
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/output> a ldvm:OutputDataPortTemplate ;
 	dcterms:title "Geokódované objekty"@cs, "Geocoded objects"@en ;
-	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-ruian-geo-datasample.ttl> ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-ruian-geo-obce-datasample.ttl> ;
 	.
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/feature/geocode> a ldvm:MandatoryFeature ;
