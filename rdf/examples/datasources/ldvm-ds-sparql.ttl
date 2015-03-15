@@ -1,0 +1,41 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:     <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix d-sparql: <http://linked.opendata.cz/ontology/ldvm/datasource/sparql/> .
+@prefix d-sparql-r: <http://linked.opendata.cz/resource/ldvm/datasource/sparql/> .
+
+d-sparql-r:SparqlEndpointDataSourceTemplate a ldvm:DataSourceTemplate ;
+	rdfs:label "SPARQL endpoint data source"@en;
+	ldvm:componentConfigurationTemplate d-sparql-r:Configuration ;
+	ldvm:outputTemplate d-sparql-r:Output ;
+	.
+
+d-sparql:SparqlEndpointDataSourceConfiguration a rdfs:Class ;
+	rdfs:label "SPARQL endpoint data source Configuration"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+	
+d-sparql:service a rdf:Property ;
+	rdfs:label "SPARQL service"@en ;
+	rdfs:domain d-sparql:SparqlEndpointDataSourceConfiguration ;
+	rdfs:range sd:Service ;
+	.
+	
+d-sparql-r:Configuration a d-sparql:SparqlEndpointDataSourceConfiguration ;
+	dcterms:title "Default SPARQL endpoint" ;
+	d-sparql:service d-sparql-r:Service ;
+	.
+
+d-sparql-r:Output a ldvm:OutputDataPortTemplate ;
+	dcterms:title "RDF Data output" ;
+	.
+	
+d-sparql-r:Service a sd:Service ;
+	sd:endpoint <http://linked.opendata.cz/sparql> ;
+	.
