@@ -1,0 +1,75 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix v-openlayers:    <http://linked.opendata.cz/ontology/ldvm/visualizer/openlayers/> .
+@prefix v-openlayers-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/openlayers/> .
+
+v-openlayers-r:OpenLayersVisualizerTemplate a ldvm:VisualizerTemplate ;
+	rdfs:label "OpenLayers Visualizer"@en;
+	rdfs:comment "Displays multipolygons and their descriptions on a map, allows filtering"@en;
+	ldvm:componentConfigurationTemplate v-openlayers-r:Configuration ;
+	ldvm:inputTemplate v-openlayers-r:Input ;
+	ldvm:feature v-openlayers-r:LabelsFeature, v-openlayers-r:BoxesFeature, v-openlayers-r:PolygonsFeature ;
+	.
+
+v-openlayers:OpenLayersVisualizerConfiguration a rdfs:Class ;
+	rdfs:label "OpenLayers Visualizer Configuration"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+
+### define properties etc. ###
+	
+v-openlayers-r:Configuration a v-openlayers:OpenLayersVisualizerConfiguration ;
+	dcterms:title "Default Configuration" ;
+	v-openlayers:polygonColor "#ff0000" ;
+	v-openlayers:center "" ;
+	v-openlayers:zoom "" ;
+	.
+
+v-openlayers-r:Input a ldvm:InputDataPortTemplate ;
+	dcterms:title "Polygons and descriptions" ;
+	.
+	
+v-openlayers-r:PolygonsFeature a ldvm:MandatoryFeature ;
+	dcterms:title "Display polygons on map" ;
+	ldvm:descriptor v-openlayers-r:MarkersDescriptor ;
+	.
+	
+v-openlayers-r:LabelsFeature a ldvm:OptionalFeature ;
+	dcterms:title "Display polygon labels" ;
+	ldvm:descriptor v-openlayers-r:LabelsDescriptor ;
+	.
+	
+v-openlayers-r:BoxesFeature a ldvm:OptionalFeature ;
+	dcterms:title "Display polygon descriptions" ;
+	ldvm:descriptor v-openlayers-r:BoxesDescriptor ;
+	.
+	
+v-openlayers-r:PolygonsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Polygons data presence check" ;
+	ldvm:query """
+		
+	""" ;
+	ldvm:appliesTo v-openlayers-r:Input ;
+	.
+
+v-openlayers-r:LabelsDescriptor a ldvm:Descriptor ;
+	dcterms:title "Geopolygon label presence check" ;
+	ldvm:query """
+
+	""" ;
+	ldvm:appliesTo v-openlayers-r:Input ;
+	.
+
+v-openlayers-r:BoxesDescriptor a ldvm:Descriptor ;
+	dcterms:title "Geopolygon description presence check" ;
+	ldvm:query """
+
+	""" ;
+	ldvm:appliesTo v-openlayers-r:Input ;
+	.
