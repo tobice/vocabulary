@@ -53,7 +53,12 @@ v-openlayers-r:BoxesFeature a ldvm:OptionalFeature ;
 v-openlayers-r:PolygonsDescriptor a ldvm:Descriptor ;
 	dcterms:title "Polygons data presence check" ;
 	ldvm:query """
-		
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+		ASK {
+			?s <http://www.opengis.net/ont/geosparql#hasGeometry> ?g .
+   			?g <http://www.opengis.net/ont/geosparql#asWKT> ?p .
+		}
 	""" ;
 	ldvm:appliesTo v-openlayers-r:Input ;
 	.
@@ -61,7 +66,12 @@ v-openlayers-r:PolygonsDescriptor a ldvm:Descriptor ;
 v-openlayers-r:LabelsDescriptor a ldvm:Descriptor ;
 	dcterms:title "Geopolygon label presence check" ;
 	ldvm:query """
+		PREFIX s: <http://schema.org/>
 
+		ASK {
+			?s <http://www.opengis.net/ont/geosparql#hasGeometry> ?g ;
+      				s:title ?l .
+		}
 	""" ;
 	ldvm:appliesTo v-openlayers-r:Input ;
 	.
@@ -69,7 +79,12 @@ v-openlayers-r:LabelsDescriptor a ldvm:Descriptor ;
 v-openlayers-r:BoxesDescriptor a ldvm:Descriptor ;
 	dcterms:title "Geopolygon description presence check" ;
 	ldvm:query """
+		PREFIX s: <http://schema.org/>
 
+		ASK {
+			?s <http://www.opengis.net/ont/geosparql#hasGeometry> ?g ;
+      				s:description ?l .
+		}
 	""" ;
 	ldvm:appliesTo v-openlayers-r:Input ;
 	.
