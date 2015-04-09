@@ -37,7 +37,7 @@ v-openlayers-r:Input a ldvm:InputDataPortTemplate ;
 	
 v-openlayers-r:PolygonsFeature a ldvm:MandatoryFeature ;
 	dcterms:title "Display polygons on map" ;
-	ldvm:descriptor v-openlayers-r:MarkersDescriptor ;
+	ldvm:descriptor v-openlayers-r:PolygonsDescriptor ;
 	.
 	
 v-openlayers-r:LabelsFeature a ldvm:OptionalFeature ;
