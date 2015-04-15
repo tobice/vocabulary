@@ -70,19 +70,10 @@
 <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/descriptor/dataset> a ldvm:Descriptor ;
 	dcterms:title "Dataset with links to RUIAN Towns" ;
 	ldvm:query """
-		prefix xsd:	<http://www.w3.org/2001/XMLSchema#> 
-		prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-		prefix skos:	<http://www.w3.org/2004/02/skos/core#> 
-		prefix s:	<http://schema.org/> 
-		prefix ogcgml:	<http://www.opengis.net/ont/gml#> 
-
-		prefix ruian:	<http://ruian.linked.opendata.cz/ontology/> 
 		prefix ruianlink: <http://ruian.linked.opendata.cz/ontology/links/> 
 
 		ASK {
-		?object	
-			ruianlink:obec	?obec ;
-			.
+		?object	ruianlink:obec	?obec .
 		}
 	""" ;
 	ldvm:appliesTo <http://ldvm.opendata.cz/resource/template/analyzer/ruian/geocoder/input/dataset> ;
