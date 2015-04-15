@@ -51,8 +51,7 @@
 
 		ASK {
 		?object	
-			ruian:definicniBod	?definicniBod ;
-			.
+			ruian:definicniBod	?definicniBod .
 			
 		?definicniBod	rdf:type	ogcgml:MultiPoint ;
 			ogcgml:pointMember	?pointMember .
