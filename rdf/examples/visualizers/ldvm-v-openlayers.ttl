@@ -49,6 +49,11 @@ v-openlayers-r:BoxesFeature a ldvm:OptionalFeature ;
 	dcterms:title "Display polygon descriptions" ;
 	ldvm:descriptor v-openlayers-r:BoxesDescriptor ;
 	.
+
+v-openlayers-r:FiltersFeature a ldvm:OptionalFeature ;
+	dcterms:title "Add controls for filtering the data" ;
+	ldvm:descriptor v-openlayers-r:FiltersDescriptor ;
+	.
 	
 v-openlayers-r:PolygonsDescriptor a ldvm:Descriptor ;
 	dcterms:title "Polygons data presence check" ;
@@ -84,6 +89,20 @@ v-openlayers-r:BoxesDescriptor a ldvm:Descriptor ;
 		ASK {
 			?s <http://www.opengis.net/ont/geosparql#hasGeometry> ?g ;
       				s:description ?l .
+		}
+	""" ;
+	ldvm:appliesTo v-openlayers-r:Input ;
+	.
+
+v-openlayers-r:FiltersDescriptor a ldvm:Descriptor ;
+	dcterms:title "Facets capabilities check" ;
+	ldvm:query """
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+		ASK {
+			?s <http://www.opengis.net/ont/geosparql#hasGeometry> ?g ;
+      				?prop ?object .
+      		?object a skos:Concept .
 		}
 	""" ;
 	ldvm:appliesTo v-openlayers-r:Input ;
