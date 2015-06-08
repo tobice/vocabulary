@@ -42,14 +42,21 @@ v-treemap-r:HierarchyDescriptor a ldvm:Descriptor ;
 	ldvm:query """
 		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 		
-		ASK {
+		ASK {{
+		   ?ca a skos:Concept;
+                      skos:inScheme [
+                      	a skos:ConceptScheme
+                      ];
+		      skos:prefLabel ?name;
+		      skos:broaderTransitive ?broader.
+		} UNION {
 		   ?ca a skos:Concept;
                       skos:inScheme [
                       	a skos:ConceptScheme
                       ];
 		      skos:prefLabel ?name;
 		      skos:broader ?broader.
-		}
+		}}
 		
 	""" ;
 	ldvm:appliesTo v-treemap-r:Input ;
