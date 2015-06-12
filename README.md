@@ -1,4 +1,4 @@
 ldvm
 ====
 
-LDVM specification and examples
+LDVM vocabulary specification and usage examples.
