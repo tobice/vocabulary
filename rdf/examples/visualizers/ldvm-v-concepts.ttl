@@ -1,0 +1,86 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix v-concept:    <http://linked.opendata.cz/ontology/ldvm/visualizer/concept/> .
+@prefix v-concept-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/concept/> .
+
+v-concept-r:ConceptVisualizerTemplate a ldvm:VisualizerTemplate ;
+	rdfs:label "Concept Visualizer"@en;
+	rdfs:comment "Displays SKOS concepts"@en;
+	ldvm:componentConfigurationTemplate v-concept-r:Configuration ;
+	ldvm:inputTemplate v-concept-r:Input ;
+	ldvm:feature v-concept-r:ConceptFeature ;
+	ldvm:feature v-concept-r:HierarchyFeature ;
+	.
+
+v-concept:ConceptVisualizerConfiguration a rdfs:Class ;
+	rdfs:label "SKOS Concepts Visualizer Configuration"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+
+### define properties etc. ###
+	
+v-concept-r:Configuration a v-concept:ConceptVisualizerConfiguration ;
+	dcterms:title "Default Configuration" ;
+	.
+
+v-concept-r:Input a ldvm:InputDataPortTemplate ;
+	dcterms:title "SKOS Concept data" ;
+	.
+	
+v-concept-r:ConceptFeature a ldvm:MandatoryFeature ;
+	dcterms:title "Display concepts" ;
+	ldvm:descriptor v-concept-r:ConceptDescriptor ;
+	.
+	
+v-concept-r:HierarchyFeature a ldvm:OptionalFeature ;
+	dcterms:title "Display hierarchies" ;
+	ldvm:descriptor v-concept-r:HierarchyDescriptor ;
+	.
+	
+v-concept-r:HierarchyDescriptor a ldvm:Descriptor ;
+	dcterms:title "Hierarchy data presence check" ;
+	ldvm:query """
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+		
+		ASK {{
+		   ?ca a skos:Concept;
+                      skos:inScheme [
+                      	a skos:ConceptScheme
+                      ];
+		      skos:prefLabel ?name;
+		      skos:broaderTransitive ?broader.
+		} UNION {
+		   ?ca a skos:Concept;
+                      skos:inScheme [
+                      	a skos:ConceptScheme
+                      ];
+		      skos:prefLabel ?name;
+		      skos:broader ?broader.
+		}}
+		
+	""" ;
+	ldvm:appliesTo v-concept-r:Input ;
+	.	
+	
+v-concept-r:ConceptDescriptor a ldvm:Descriptor ;
+	dcterms:title "Concept data presence check" ;
+	ldvm:query """
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+		
+		ASK {
+		   ?ca a skos:Concept;
+                      skos:inScheme [
+                      	a skos:ConceptScheme
+                      ];
+		      skos:prefLabel ?name;
+		}
+		
+	""" ;
+	ldvm:appliesTo v-concept-r:Input ;
+	.
