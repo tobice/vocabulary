@@ -53,14 +53,12 @@ v-concept-r:HierarchyDescriptor a ldvm:Descriptor ;
                       skos:inScheme [
                       	a skos:ConceptScheme
                       ];
-		      skos:prefLabel ?name;
 		      skos:broaderTransitive ?broader.
 		} UNION {
 		   ?ca a skos:Concept;
                       skos:inScheme [
                       	a skos:ConceptScheme
                       ];
-		      skos:prefLabel ?name;
 		      skos:broader ?broader.
 		}}
 		
@@ -77,8 +75,7 @@ v-concept-r:ConceptDescriptor a ldvm:Descriptor ;
 		   ?ca a skos:Concept;
                       skos:inScheme [
                       	a skos:ConceptScheme
-                      ];
-		      skos:prefLabel ?name;
+                      ] .
 		}
 		
 	""" ;
