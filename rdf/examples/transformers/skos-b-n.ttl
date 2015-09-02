@@ -14,6 +14,7 @@ t-sbn-r:SkosBroaderNarrowerTransformerTemplate a ldvm:TransformerTemplate ;
 	rdfs:comment "Transforms broader relationships to narrower relationships"@en;
 	ldvm:componentConfigurationTemplate t-sbn-r:Configuration ;
 	ldvm:inputTemplate t-sbn-r:DataInput ;
+	ldvm:outputTemplate t-sbn-r:Output ;
 	ldvm:feature t-sbn-r:TransformFeature ;
 	.
 
@@ -30,6 +31,11 @@ t-sbn-r:Configuration a t-sbn-r:SkosBroaderNarrowerTransformerConfiguration ;
 
 t-sbn-r:DataInput a ldvm:InputDataPortTemplate ;
 	dcterms:title "Data with broader relationships" ;
+	.
+	
+t-sbn-r:Output a ldvm:OutputDataPortTemplate ;
+	dcterms:title "RDF Data output" ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/payola/ldvm/master/rdf/examples/ldvm-skos-b-n-datasample.ttl> ;
 	.
 	
 t-sbn-r:TransformFeature a ldvm:MandatoryFeature ;
