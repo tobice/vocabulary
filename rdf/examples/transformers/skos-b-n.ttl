@@ -1,1 +1,50 @@
-# TBD
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:     <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix t-sbn:    <http://linked.opendata.cz/ontology/ldvm/transformer/skos-broader-narrower/> .
+@prefix t-sbn-r:  <http://linked.opendata.cz/resource/ldvm/transformer/skos-broader-narrower/> .
+
+t-sbn-r:SkosBroaderNarrowerTransformerTemplate a ldvm:TransformerTemplate ;
+	rdfs:label "SKOS broader to narrower transformer"@en;
+	rdfs:comment "Transforms broader relationships to narrower relationships"@en;
+	ldvm:componentConfigurationTemplate t-sbn-r:Configuration ;
+	ldvm:inputTemplate t-sbn-r:DataInput ;
+	ldvm:feature t-sbn-r:TransformFeature ;
+	.
+
+t-sbn-r:SkosBroaderNarrowerTransformerConfiguration a rdfs:Class ;
+	rdfs:label "SKOS broader -> narrower transformer"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+
+### define properties etc. ###
+	
+t-sbn-r:Configuration a t-sbn-r:SkosBroaderNarrowerTransformerConfiguration ;
+	dcterms:title "Default Configuration" ;
+	.
+
+t-sbn-r:DataInput a ldvm:InputDataPortTemplate ;
+	dcterms:title "Data with broader relationships" ;
+	.
+	
+t-sbn-r:TransformFeature a ldvm:MandatoryFeature ;
+	dcterms:title "Transforms broader to narrower" ;
+	ldvm:descriptor t-sbn-r:TransformDescriptor ;
+	.
+	
+t-sbn-r:TransformDescriptor a ldvm:Descriptor ;
+	dcterms:title "Broader presence check" ;
+	ldvm:query """
+		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+		
+		ASK {
+			?x skos:broader ?y .
+		}
+	""" ;
+	ldvm:appliesTo t-sbn-r:DataInput ;
+	.
