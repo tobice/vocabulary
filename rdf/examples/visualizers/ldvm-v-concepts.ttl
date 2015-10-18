@@ -50,15 +50,11 @@ v-concept-r:HierarchyDescriptor a ldvm:Descriptor ;
 		
 		ASK {{
 		   ?ca a skos:Concept;
-                      skos:inScheme [
-                      	a skos:ConceptScheme
-                      ];
+                      skos:inScheme [];
 		      skos:broaderTransitive ?broader.
 		} UNION {
 		   ?ca a skos:Concept;
-                      skos:inScheme [
-                      	a skos:ConceptScheme
-                      ];
+                      skos:inScheme [];
 		      skos:broader ?broader.
 		}}
 		
@@ -73,9 +69,7 @@ v-concept-r:ConceptDescriptor a ldvm:Descriptor ;
 		
 		ASK {
 		   ?ca a skos:Concept;
-                      skos:inScheme [
-                      	a skos:ConceptScheme
-                      ] .
+                      skos:inScheme [] .
 		}
 		
 	""" ;
