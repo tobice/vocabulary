@@ -1,0 +1,54 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
+@prefix v-chord:    <http://linked.opendata.cz/ontology/ldvm/visualizer/chord/> .
+@prefix v-chord-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/chord/> .
+
+v-chord-r:GoogleMapsVisualizerTemplate a ldvm:VisualizerTemplate ;
+	rdfs:label "D3.js Chord Visualizer"@en;
+	rdfs:comment "Displays data using D3.js Chord visualization"@en;
+	ldvm:componentConfigurationTemplate v-chord-r:Configuration ;
+	ldvm:inputTemplate v-chord-r:Input ;
+	ldvm:feature v-chord-r:LabelsFeature, v-chord-r:BoxesFeature, v-chord-r:MarkersFeature ;
+	.
+
+v-chord:GoogleMapsVisualizerConfiguration a rdfs:Class ;
+	rdfs:label "D3.js Chord Visualizer Configuration"@en;
+	rdfs:subClassOf ldvm:ComponentConfiguration ;
+	.
+
+### define properties etc. ###
+	
+v-chord-r:Configuration a v-chord:GoogleMapsVisualizerConfiguration ;
+	dcterms:title "Default Configuration" ;
+	v-chord:markerColor "#ff0000" ;
+	v-chord:center "" ;
+	v-chord:zoom "" ;
+	.
+
+v-chord-r:Input a ldvm:InputDataPortTemplate ;
+	dcterms:title "Edges between points" ;
+	.
+	
+v-chord-r:EdgesFeature a ldvm:MandatoryFeature ;
+	dcterms:title "Edges between points" ;
+	ldvm:descriptor v-chord-r:EdgesDescriptor ;
+	.
+	
+v-chord-r:MarkersDescriptor a ldvm:Descriptor ;
+	dcterms:title "Edge presence check" ;
+	ldvm:query """
+		PREFIX chord: <http://linked.opendata.cz/ontology/chord/>
+
+		ASK {
+			?edge chord:source ?source .
+			?edge chord:target ?target .
+		}
+	""" ;
+	ldvm:appliesTo v-chord-r:Input ;
+	.

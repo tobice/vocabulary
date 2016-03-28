@@ -1,0 +1,52 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+
+@prefix a-sparql-r:  <http://linked.opendata.cz/resource/ldvm/analyzer/sparql/> .
+@prefix a-sparql:    <http://linked.opendata.cz/ontology/ldvm/analyzer/sparql/> .
+@prefix ldvm:  <http://linked.opendata.cz/ontology/ldvm/> .
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord> a ldvm:AnalyzerTemplate ;
+	dcterms:title "Cz Government Contracts Chord Analyzer"@en ;
+	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> ;
+	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/ouput> ;
+	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/feature> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> a ldvm:InputDataPortTemplate ;
+	dcterms:title "Dataset with contracts"@en, "Dataset se smlouvami"@cs ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/output> a ldvm:OutputDataPortTemplate ;
+	dcterms:title "Smlouvy ve formátu pro Chord graf"@cs, "Contracts formatted for the Chord visualization"@en ;
+	ldvm:outputDataSample <https://raw.githubusercontent.com/tobice/vocabulary/master/rdf/examples/ldvm-gov-cz-smlouvy-datasample.ttl> ;
+	.
+	
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/feature> a ldvm:MandatoryFeature ;
+	dcterms:title "Transform for the Chord visualization "@en ;
+	ldvm:descriptor <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/descriptor> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/descriptor> a ldvm:Descriptor ;
+	dcterms:title "Contracts" ;
+	ldvm:query """
+		PREFIX gr: <http://purl.org/goodrelations/v1#>
+		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
+
+		ASK {
+			?organisation
+				a gr:BusinessEntity ;
+				rejstriky:smlouva ?contract
+				.
+
+			?contract a rejstriky:Smlouva ;
+				<http://purl.org/dc/terms/subject> ?subject ;
+				rejstriky:partner ?partner
+				.
+		}
+	""" ;
+	ldvm:appliesTo <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> ;
+	.

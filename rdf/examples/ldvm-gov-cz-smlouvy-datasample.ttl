@@ -1,0 +1,6 @@
+@prefix chord:	<http://linked.opendata.cz/ontology/chord/> .
+
+_:b18067296
+	chord:source	<http://linked.opendata.cz/resource/business-entity/CZ00276111> ;
+	chord:target	<http://linked.opendata.cz/resource/domain/seznam.gov.cz/rejstriky/business-entity/29029210>
+	.
