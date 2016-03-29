@@ -12,7 +12,7 @@
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord> a ldvm:AnalyzerTemplate ;
 	dcterms:title "Cz Government Contracts Chord Analyzer"@en ;
 	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> ;
-	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/ouput> ;
+	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/output> ;
 	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/feature> ;
 	.
 	

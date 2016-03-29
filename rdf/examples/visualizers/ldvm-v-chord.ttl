@@ -9,22 +9,22 @@
 @prefix v-chord:    <http://linked.opendata.cz/ontology/ldvm/visualizer/chord/> .
 @prefix v-chord-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/chord/> .
 
-v-chord-r:GoogleMapsVisualizerTemplate a ldvm:VisualizerTemplate ;
+v-chord-r:ChordVisualizerTemplate a ldvm:VisualizerTemplate ;
 	rdfs:label "D3.js Chord Visualizer"@en;
 	rdfs:comment "Displays data using D3.js Chord visualization"@en;
 	ldvm:componentConfigurationTemplate v-chord-r:Configuration ;
 	ldvm:inputTemplate v-chord-r:Input ;
-	ldvm:feature v-chord-r:LabelsFeature, v-chord-r:BoxesFeature, v-chord-r:MarkersFeature ;
+	ldvm:feature v-chord-r:EdgesFeature ;
 	.
 
-v-chord:GoogleMapsVisualizerConfiguration a rdfs:Class ;
+v-chord:ChordVisualizerConfiguration a rdfs:Class ;
 	rdfs:label "D3.js Chord Visualizer Configuration"@en;
 	rdfs:subClassOf ldvm:ComponentConfiguration ;
 	.
 
 ### define properties etc. ###
 	
-v-chord-r:Configuration a v-chord:GoogleMapsVisualizerConfiguration ;
+v-chord-r:Configuration a v-chord:ChordVisualizerConfiguration ;
 	dcterms:title "Default Configuration" ;
 	v-chord:markerColor "#ff0000" ;
 	v-chord:center "" ;
@@ -40,7 +40,7 @@ v-chord-r:EdgesFeature a ldvm:MandatoryFeature ;
 	ldvm:descriptor v-chord-r:EdgesDescriptor ;
 	.
 	
-v-chord-r:MarkersDescriptor a ldvm:Descriptor ;
+v-chord-r:EdgesDescriptor a ldvm:Descriptor ;
 	dcterms:title "Edge presence check" ;
 	ldvm:query """
 		PREFIX chord: <http://linked.opendata.cz/ontology/chord/>
