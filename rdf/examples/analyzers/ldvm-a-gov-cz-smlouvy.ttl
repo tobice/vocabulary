@@ -14,6 +14,7 @@
 	ldvm:inputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> ;
 	ldvm:outputTemplate <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/output> ;
 	ldvm:feature <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/feature> ;
+	ldvm:nestedPipeline <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1> ;
 	.
 	
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> a ldvm:InputDataPortTemplate ;
@@ -49,4 +50,57 @@
 		}
 	""" ;
 	ldvm:appliesTo <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> ;
+	.
+
+# Pipeline
+
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1> a ldvm:Pipeline ;
+	ldvm:member <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql> a ldvm:AnalyzerInstance ;
+	ldvm:instanceOf a-sparql-r:SparqlAnalyzerTemplate ;
+	ldvm:inputInstance <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/input/1> ;
+	ldvm:outputInstance <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/output/1> ;
+	ldvm:componentConfigurationInstance <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/configuration> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/configuration> a a-sparql:SparqlAnalyzerConfiguration ;
+	dcterms:title "Query extracting edges"@en, "Dotaz extrahující hrany"@cs ;
+	a-sparql:query """
+		PREFIX gr: <http://purl.org/goodrelations/v1#>
+		PREFIX chord: <http://linked.opendata.cz/ontology/chord/>
+		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
+
+		CONSTRUCT {
+			_:node123
+				chord:source ?organisation ;
+				chord:target ?partner .
+		}
+		WHERE {
+			SELECT ?organisation, ?partner WHERE {
+				?organisation
+					a gr:BusinessEntity ;
+					rejstriky:smlouva ?contract .
+
+				?contract a rejstriky:Smlouva ;
+					rejstriky:partner ?partner.
+			}
+
+			GROUP BY ?contract
+		}
+	""" ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/input/1> a ldvm:DataPortInstance ;
+	dcterms:title "Registr smluv" ;
+	ldvm:dataportInstanceOf a-sparql-r:Input ;
+	ldvm:nestedBoundTo <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/input> ;
+	.
+
+<http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/output/1> a ldvm:DataPortInstance ;
+	dcterms:title "Smlouvy vyextrahované jako hrany" ;
+	ldvm:dataportInstanceOf a-sparql-r:Output ;
+	ldvm:nestedBoundTo <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/output> ;
 	.
