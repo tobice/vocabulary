@@ -79,7 +79,7 @@
 				chord:target ?partner .
 		}
 		WHERE {
-			SELECT ?organisation, ?partner WHERE {
+			SELECT ?organisation ?partner WHERE {
 				?organisation
 					a gr:BusinessEntity ;
 					rejstriky:smlouva ?contract .
@@ -88,7 +88,7 @@
 					rejstriky:partner ?partner.
 			}
 
-			GROUP BY ?contract
+			GROUP BY ?contract ?organisation ?partner
 		}
 	""" ;
 	.
