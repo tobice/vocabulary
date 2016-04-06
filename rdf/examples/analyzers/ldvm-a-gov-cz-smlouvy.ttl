@@ -38,7 +38,7 @@
 		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
 
 		ASK {
-			?organisation
+			?organization
 				a gr:BusinessEntity ;
 				rejstriky:smlouva ?contract
 				.
@@ -69,26 +69,63 @@
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/configuration> a a-sparql:SparqlAnalyzerConfiguration ;
 	dcterms:title "Query extracting edges"@en, "Dotaz extrahující hrany"@cs ;
 	a-sparql:query """
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX rgml: <http://purl.org/puninj/2001/05/rgml-schema#>
+		PREFIX fresnel:  <http://www.w3.org/2004/09/fresnel#>
 		PREFIX gr: <http://purl.org/goodrelations/v1#>
-		PREFIX chord: <http://linked.opendata.cz/ontology/chord/>
 		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
+		PREFIX profiles: <http://linked.opendata.cz/ontology/buyer-profiles/>
 
 		CONSTRUCT {
-			_:node123
-				chord:source ?organisation ;
-				chord:target ?partner .
+			_:graph rdf:type rgml:Graph ;
+				rgml:directed true .
+
+			?organization rdf:type rgml:Node ;
+				rdfs:label ?organizationName ;
+				gr:legalName ?organizationName ;
+				profiles:dic ?organizationDic .
+
+			?partner rdf:type rgml:Node ;
+				rdfs:label ?partnerName ;
+				gr:legalName ?partnerName .
+
+			?contract rdf:type rgml:Edge ;
+				rgml:source ?organization ;
+				rgml:target ?partner ;
+				rgml:weight "1" .
+
+			_:searchableLens rdf:type fresnel:Lens ;
+				fresnel:purpose "searchable" ;
+				fresnel:classLensDomain rgml:Node ;
+				fresnel:showProperties ( gr:legalName profiles:dic ) .
+
+			profiles:dic
+				rdfs:label "DIČ"@cz ;
+				rdfs:label "DIC"@en .
+
+			gr:legalName
+				rdfs:label "Název subjektu"@cz ;
+				rdfs:label "Legal name"@en .
 		}
 		WHERE {
-			SELECT ?organisation ?partner WHERE {
-				?organisation
+			SELECT ?contract ?organization ?organizationDic ?partner
+				(SAMPLE(?organizationNames) AS ?organizationName)
+				(SAMPLE(?partnerNames) AS ?partnerName)
+			WHERE {
+				?organization
 					a gr:BusinessEntity ;
 					rejstriky:smlouva ?contract .
 
 				?contract a rejstriky:Smlouva ;
-					rejstriky:partner ?partner.
-			}
+					rejstriky:partner ?partner .
 
-			GROUP BY ?contract ?organisation ?partner
+				OPTIONAL { ?organization profiles:dic ?organizationDic . }
+
+				OPTIONAL { ?organization gr:legalName ?organizationNames . }
+				OPTIONAL { ?partner gr:legalName ?partnerNames . }
+			}
+			GROUP BY ?contract ?organization ?organizationDic ?partner
 		}
 	""" ;
 	.
