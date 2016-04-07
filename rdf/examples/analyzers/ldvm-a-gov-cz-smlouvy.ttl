@@ -76,9 +76,10 @@
 		PREFIX gr: <http://purl.org/goodrelations/v1#>
 		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
 		PREFIX profiles: <http://linked.opendata.cz/ontology/buyer-profiles/>
+		PREFIX : <#>
 
 		CONSTRUCT {
-			_:graph rdf:type rgml:Graph ;
+			:graph rdf:type rgml:Graph ;
 				rgml:directed true .
 
 			?organization rdf:type rgml:Node ;
@@ -95,7 +96,7 @@
 				rgml:target ?partner ;
 				rgml:weight "1" .
 
-			_:searchableLens rdf:type fresnel:Lens ;
+			:searchableLens rdf:type fresnel:Lens ;
 				fresnel:purpose "searchable" ;
 				fresnel:classLensDomain rgml:Node ;
 				fresnel:showProperties ( gr:legalName profiles:dic ) .
