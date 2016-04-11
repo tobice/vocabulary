@@ -80,7 +80,7 @@
 
 		CONSTRUCT {
 			:graph rdf:type rgml:Graph ;
-				rgml:directed true .
+				rgml:directed false .
 
 			?organization rdf:type rgml:Node ;
 				rdfs:label ?organizationName ;
