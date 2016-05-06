@@ -11,10 +11,10 @@
 
 v-chord-r:ChordVisualizerTemplate a ldvm:VisualizerTemplate ;
 	rdfs:label "D3.js Chord Visualizer"@en;
-	rdfs:comment "Displays data using D3.js Chord visualization"@en;
+	rdfs:comment "Displays graph data using D3.js Chord visualization"@en;
 	ldvm:componentConfigurationTemplate v-chord-r:Configuration ;
 	ldvm:inputTemplate v-chord-r:Input ;
-	ldvm:feature v-chord-r:EdgesFeature ;
+	ldvm:feature v-chord-r:GraphFeature , v-chord-r:SearchableFeature ;
 	.
 
 v-chord:ChordVisualizerConfiguration a rdfs:Class ;
@@ -26,28 +26,55 @@ v-chord:ChordVisualizerConfiguration a rdfs:Class ;
 	
 v-chord-r:Configuration a v-chord:ChordVisualizerConfiguration ;
 	dcterms:title "Default Configuration" ;
-	v-chord:markerColor "#ff0000" ;
-	v-chord:center "" ;
-	v-chord:zoom "" ;
 	.
 
 v-chord-r:Input a ldvm:InputDataPortTemplate ;
-	dcterms:title "Edges between points" ;
+	dcterms:title "Graph data described using RGML vocabulary" ;
 	.
 	
-v-chord-r:EdgesFeature a ldvm:MandatoryFeature ;
-	dcterms:title "Edges between points" ;
-	ldvm:descriptor v-chord-r:EdgesDescriptor ;
+v-chord-r:GraphFeature a ldvm:MandatoryFeature ;
+	dcterms:title "The actual graph data, i. e. nodes and edges" ;
+	ldvm:descriptor v-chord-r:GraphDescriptor ;
 	.
-	
-v-chord-r:EdgesDescriptor a ldvm:Descriptor ;
-	dcterms:title "Edge presence check" ;
+
+v-chord-r:SearchableFeature a ldvm:OptionalFeature ;
+	dcterms:title "Meta-data allowing searching through the graph" ;
+	ldvm:descriptor v-chord-r:SearchableDescriptor ;
+
+v-chord-r:GraphDescriptor a ldvm:Descriptor ;
+	dcterms:title "Graph presence check" ;
 	ldvm:query """
-		PREFIX chord: <http://linked.opendata.cz/ontology/chord/>
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		PREFIX rgml: <http://purl.org/puninj/2001/05/rgml-schema#>
 
 		ASK {
-			?edge chord:source ?source .
-			?edge chord:target ?target .
+			?graph rdf:type rgml:Graph ;
+				rgml:directed ?directed .
+
+			?edge rdf:type rgml:Edge ;
+				rgml:source ?source ;
+				rgml:target ?target ;
+				rgml:weight ?weight .
+
+			?source rdf:type rgml:Node .
+			?target rdf:type rgml:Node .
+		}
+	""" ;
+	ldvm:appliesTo v-chord-r:Input ;
+	.
+
+v-chord-r:SearchableDescriptor a ldvm:Descriptor ;
+	dcterms:title "Searchable lense presence check" ;
+	ldvm:query """
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		PREFIX rgml: <http://purl.org/puninj/2001/05/rgml-schema#>
+		PREFIX fresnel:  <http://www.w3.org/2004/09/fresnel#>
+
+		ASK {
+			?searchableLens rdf:type fresnel:Lens ;
+				fresnel:purpose "searchable" ;
+				fresnel:classLensDomain rgml:Node ;
+				fresnel:showProperties ?properties .
 		}
 	""" ;
 	ldvm:appliesTo v-chord-r:Input ;

@@ -22,7 +22,7 @@
 	.
 
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/output> a ldvm:OutputDataPortTemplate ;
-	dcterms:title "Smlouvy ve formátu pro Chord graf"@cs, "Contracts formatted for the Chord visualization"@en ;
+	dcterms:title "Smlouvy popsané jako graf pro Chord visualizaci"@cs, "Contracts described as graph the Chord visualization"@en ;
 	ldvm:outputDataSample <https://raw.githubusercontent.com/tobice/vocabulary/master/rdf/examples/ldvm-gov-cz-smlouvy-datasample.ttl> ;
 	.
 	
@@ -32,7 +32,7 @@
 	.
 
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/descriptor> a ldvm:Descriptor ;
-	dcterms:title "Contracts" ;
+	dcterms:title "Contracts"@en, "Smlouvy"@cs ;
 	ldvm:query """
 		PREFIX gr: <http://purl.org/goodrelations/v1#>
 		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
@@ -54,7 +54,6 @@
 
 # Pipeline
 
-
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1> a ldvm:Pipeline ;
 	ldvm:member <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql> ;
 	.
@@ -67,7 +66,8 @@
 	.
 
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/configuration> a a-sparql:SparqlAnalyzerConfiguration ;
-	dcterms:title "Query extracting edges"@en, "Dotaz extrahující hrany"@cs ;
+	dcterms:title "Query extracting organisations and contracts as nodes and edges"@en,
+	    "Dotaz extrahující organizace a smlouvy jako vrcholy a hrany"@cs ;
 	a-sparql:query """
 		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -76,7 +76,7 @@
 		PREFIX gr: <http://purl.org/goodrelations/v1#>
 		PREFIX rejstriky: <http://linked.opendata.cz/ontology/domain/seznam.gov.cz/rejstriky/>
 		PREFIX profiles: <http://linked.opendata.cz/ontology/buyer-profiles/>
-		PREFIX : <#>
+		PREFIX : <http://linked.opendata.cz/ontology/temporary/chord#>
 
 		CONSTRUCT {
 			:graph rdf:type rgml:Graph ;
@@ -138,7 +138,7 @@
 	.
 
 <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/instance/1/sparql/output/1> a ldvm:DataPortInstance ;
-	dcterms:title "Smlouvy vyextrahované jako hrany" ;
+	dcterms:title "Smlouvy popsané jako graf" ;
 	ldvm:dataportInstanceOf a-sparql-r:Output ;
 	ldvm:nestedBoundTo <http://ldvm.opendata.cz/resource/template/analyzer/gov-cz-smlouvy/chord/output> ;
 	.

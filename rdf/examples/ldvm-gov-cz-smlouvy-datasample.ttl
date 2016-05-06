@@ -1,6 +1,22 @@
-@prefix chord:	<http://linked.opendata.cz/ontology/chord/> .
+@prefix rgml: <http://purl.org/puninj/2001/05/rgml-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix profiles: <http://linked.opendata.cz/ontology/buyer-profiles/> .
+@prefix : <http://linked.opendata.cz/ontology/temporary/chord#> .
 
-_:b18067296
-	chord:source	<http://linked.opendata.cz/resource/business-entity/CZ00276111> ;
-	chord:target	<http://linked.opendata.cz/resource/domain/seznam.gov.cz/rejstriky/business-entity/29029210>
-	.
+:graph rdf:type rgml:Graph ;
+    rgml:directed false .
+
+_:b18067296 rdf:type rgml:Edge ;
+	rgml:source	<http://linked.opendata.cz/resource/business-entity/CZ00276111> ;
+	rgml:target	<http://linked.opendata.cz/resource/domain/seznam.gov.cz/rejstriky/business-entity/29029210> ;
+	rgml:weight "1" .
+
+<http://linked.opendata.cz/resource/business-entity/CZ00276111> rdf:type rgml:Node .
+<http://linked.opendata.cz/resource/domain/seznam.gov.cz/rejstriky/business-entity/29029210> rdf:type rgml:Node .
+
+:searchableLens rdf:type fresnel:Lens ;
+    fresnel:purpose "searchable" ;
+    fresnel:classLensDomain rgml:Node ;
+    fresnel:showProperties ( gr:legalName profiles:dic ) .
