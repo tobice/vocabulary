@@ -40,6 +40,7 @@ v-chord-r:GraphFeature a ldvm:MandatoryFeature ;
 v-chord-r:SearchableFeature a ldvm:OptionalFeature ;
 	dcterms:title "Meta-data allowing searching through the graph" ;
 	ldvm:descriptor v-chord-r:SearchableDescriptor ;
+	.
 
 v-chord-r:GraphDescriptor a ldvm:Descriptor ;
 	dcterms:title "Graph presence check" ;
