@@ -102,11 +102,11 @@
 				fresnel:showProperties ( gr:legalName profiles:dic ) .
 
 			profiles:dic
-				rdfs:label "DIČ"@cz ;
+				rdfs:label "DIČ"@cs ;
 				rdfs:label "DIC"@en .
 
 			gr:legalName
-				rdfs:label "Název subjektu"@cz ;
+				rdfs:label "Název subjektu"@cs ;
 				rdfs:label "Legal name"@en .
 		}
 		WHERE {
