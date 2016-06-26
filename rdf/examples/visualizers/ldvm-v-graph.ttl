@@ -1,60 +1,55 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix void:  <http://rdfs.org/ns/void#> .
-@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-
 @prefix ldvm:       <http://linked.opendata.cz/ontology/ldvm/> .
 @prefix v-graph:    <http://linked.opendata.cz/ontology/ldvm/visualizer/graph/> .
 @prefix v-graph-r:  <http://linked.opendata.cz/resource/ldvm/visualizer/graph/> .
 
 v-graph-r:GraphVisualizerTemplate a ldvm:VisualizerTemplate ;
-	rdfs:label "Graph Visualizer"@en;
-	rdfs:comment "Visualizes graph data"@en;
-	ldvm:componentConfigurationTemplate v-graph-r:Configuration ;
-	ldvm:inputTemplate v-graph-r:Input ;
-	ldvm:feature v-graph-r:GraphFeature ;
-	.
+    rdfs:label "Graph Visualizer"@en;
+    rdfs:comment "Visualizes graph data"@en;
+    ldvm:componentConfigurationTemplate v-graph-r:Configuration ;
+    ldvm:inputTemplate v-graph-r:Input ;
+    ldvm:feature v-graph-r:GraphFeature ;
+    .
 
 v-graph:GraphVisualizerConfiguration a rdfs:Class ;
-	rdfs:label "Graph Visualizer Configuration"@en;
-	rdfs:subClassOf ldvm:ComponentConfiguration ;
-	.
+    rdfs:label "Graph Visualizer Configuration"@en;
+    rdfs:subClassOf ldvm:ComponentConfiguration ;
+    .
 
 ### define properties etc. ###
-	
+    
 v-graph-r:Configuration a v-graph:GraphVisualizerConfiguration ;
-	dcterms:title "Default Configuration" ;
-	.
+    dcterms:title "Default Configuration" ;
+    .
 
 v-graph-r:Input a ldvm:InputDataPortTemplate ;
-	dcterms:title "Graph data described using RGML vocabulary" ;
-	.
-	
+    dcterms:title "Graph data described using RGML vocabulary" ;
+    .
+    
 v-graph-r:GraphFeature a ldvm:MandatoryFeature ;
-	dcterms:title "The actual graph data, i. e. nodes and edges" ;
-	ldvm:descriptor v-graph-r:GraphDescriptor ;
-	.
+    dcterms:title "The actual graph data, i. e. nodes and edges" ;
+    ldvm:descriptor v-graph-r:GraphDescriptor ;
+    .
 
 v-graph-r:GraphDescriptor a ldvm:Descriptor ;
-	dcterms:title "Graph presence check" ;
-	ldvm:query """
-		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-		PREFIX rgml: <http://purl.org/puninj/2001/05/rgml-schema#>
+    dcterms:title "Graph presence check" ;
+    ldvm:query """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rgml: <http://purl.org/puninj/2001/05/rgml-schema#>
 
-		ASK {
-			?graph rdf:type rgml:Graph ;
-				rgml:directed ?directed .
+        ASK {
+            ?graph rdf:type rgml:Graph ;
+                rgml:directed ?directed .
 
-			?edge rdf:type rgml:Edge ;
-				rgml:source ?source ;
-				rgml:target ?target ;
-				rgml:weight ?weight .
+            ?edge rdf:type rgml:Edge ;
+                rgml:source ?source ;
+                rgml:target ?target ;
+                rgml:weight ?weight .
 
-			?source rdf:type rgml:Node .
-			?target rdf:type rgml:Node .
-		}
-	""" ;
-	ldvm:appliesTo v-graph-r:Input ;
-	.
+            ?source rdf:type rgml:Node .
+            ?target rdf:type rgml:Node .
+        }
+    """ ;
+    ldvm:appliesTo v-graph-r:Input ;
+    .
